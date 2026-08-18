@@ -1,0 +1,1 @@
+document.querySelectorAll(".movie-card").forEach((c,i)=>c.style.animationDelay=i*30+"ms");

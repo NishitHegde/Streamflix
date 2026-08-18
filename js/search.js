@@ -1,0 +1,1 @@
+const input=document.querySelector(".search-input");if(input){const cards=[...document.querySelectorAll(".movie-card")];input.addEventListener("input",()=>{const q=input.value.toLowerCase().trim();cards.forEach(c=>c.style.display=!q||c.innerText.toLowerCase().includes(q)?"":"none")})}

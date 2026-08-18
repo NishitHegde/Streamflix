@@ -1,0 +1,1 @@
+document.querySelectorAll("[data-logout]").forEach(x=>x.onclick=()=>{localStorage.removeItem("streamflixLoggedIn");location.href="index.html"})

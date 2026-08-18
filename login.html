@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign In | Streamflix</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.login-security{font-size:12px;color:#9b9ba3;line-height:1.5;margin:14px 0;padding:11px 13px;background:#15161a;border:1px solid #292a30;border-radius:12px}
+.password-line{position:relative}.password-line input{padding-right:70px}.show-pass{position:absolute;right:6px;top:6px;height:34px;border:0;border-radius:8px;background:#292a30;color:#eee;padding:0 11px;cursor:pointer;font-weight:700}.show-pass:hover{background:#3a3b42}
+.auth-links{display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:12px;margin:5px 0 14px}.remember{display:flex;align-items:center;gap:7px;color:#aaa}.remember input{width:auto}
+.role-picker{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0 18px}.role-card{appearance:none;border:1px solid #303139;background:#17181c;color:#ddd;border-radius:14px;padding:14px 12px;text-align:left;cursor:pointer;transition:.2s ease;position:relative}.role-card:hover{transform:translateY(-2px);border-color:#555761;background:#1d1e23}.role-card.active{border-color:#e50914;background:linear-gradient(145deg,rgba(229,9,20,.18),#17181c);box-shadow:0 0 0 1px rgba(229,9,20,.2),0 12px 30px rgba(229,9,20,.12)}.role-card .role-icon{font-size:23px;display:block;margin-bottom:7px}.role-card strong{display:block;font-size:14px}.role-card small{display:block;color:#999;margin-top:3px}.role-check{position:absolute;right:10px;top:10px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#e50914;color:#fff;font-size:12px;opacity:0;transform:scale(.7);transition:.2s}.role-card.active .role-check{opacity:1;transform:scale(1)}
+.role-note{font-size:12px;color:#8e8f98;margin:-5px 0 15px}.admin-mode{display:none}.admin-mode.visible{display:block}.user-mode.hidden{display:none}.admin-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#ffb3b7;background:rgba(229,9,20,.1);border:1px solid rgba(229,9,20,.25);padding:5px 9px;border-radius:999px;margin-bottom:12px}.demo-credentials{font-size:11px;color:#777;margin-top:10px;text-align:center}.auth-submit{width:100%}.hidden{display:none!important}
+@media(max-width:520px){.role-picker{grid-template-columns:1fr}.auth-box{padding:25px 20px}}
+</style>
+<script>
+if(sessionStorage.getItem('streamflix_admin_auth')==='1'){
+  location.replace('admin.html');
+}
+</script>
+</head>
+<body>
+<div class="auth-page">
+<header class="auth-header"><a class="auth-logo" href="index.html">STREAMFLIX</a><a id="signupHeaderLink" class="btn outline" href="signup.html">Sign Up</a></header>
+<main class="auth-main">
+<form class="auth-box" id="loginForm" autocomplete="on">
+<h1 id="loginTitle">Welcome back</h1>
+<p class="auth-small" id="loginSubtitle" style="margin-top:-8px">Choose how you want to sign in.</p>
+
+<div class="role-picker" role="group" aria-label="Choose account type">
+<button type="button" class="role-card active" data-role="user" aria-pressed="true"><span class="role-icon">👤</span><strong>Continue as User</strong><small>Watch movies & TV shows</small><span class="role-check">✓</span></button>
+<button type="button" class="role-card" data-role="admin" aria-pressed="false"><span class="role-icon">🛡️</span><strong>Continue as Admin</strong><small>Manage Streamflix</small><span class="role-check">✓</span></button>
+</div>
+<p class="role-note" id="roleNote">Sign in with your Streamflix member account.</p>
+
+<div class="user-mode" id="userMode">
+<div class="form-group"><label>Email</label><input id="loginEmail" name="email" type="email" autocomplete="email" required placeholder="Email address"></div>
+<div class="form-group"><label>Password</label><div class="password-line"><input id="loginPassword" name="password" type="password" autocomplete="current-password" required placeholder="Password"><button type="button" class="show-pass" data-target="loginPassword">Show</button></div></div>
+<div class="auth-links"><label class="remember"><input id="rememberMe" type="checkbox"> Remember me</label><a href="#" id="forgotPassword">Forgot password?</a></div>
+<div class="login-security">🛡️ <b>Private demo sign-in</b><br>Your account is stored locally in this frontend demo. Production apps should use server-side authentication and encrypted sessions.</div>
+<button class="auth-submit" type="submit">Sign In as User →</button>
+<p class="auth-small">New to Streamflix? <a href="signup.html">Sign up now.</a></p>
+</div>
+
+<div class="admin-mode" id="adminMode">
+<div class="admin-badge">🛡️ ADMIN ACCESS</div>
+<div class="form-group"><label>Admin Username</label><input id="adminUser" autocomplete="username" placeholder="Enter admin username"></div>
+<div class="form-group"><label>Admin Password</label><div class="password-line"><input id="adminPass" type="password" autocomplete="current-password" placeholder="Enter admin password"><button type="button" class="show-pass" data-target="adminPass">Show</button></div></div>
+<div class="login-security">🔐 <b>Protected control center</b><br>Only authorized administrators should use this area. In production, replace demo credentials with real server-side authentication.</div>
+<button class="auth-submit" type="submit">Sign In & Open Admin Dashboard →</button>
+<p class="demo-credentials">Demo admin: <b>admin</b> / <b>admin123</b></p>
+</div>
+</form>
+</main>
+</div>
+<script src="js/app.js"></script>
+<script src="js/movie-data.js"></script>
+<script src="js/admin-sync.js"></script>
+<script src="js/artwork.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/enhancer.js"></script>
+<script src="js/premium-ux.js"></script>
+<script>
+(function(){
+ const form=document.getElementById('loginForm');
+ const cards=[...document.querySelectorAll('.role-card')];
+ const userMode=document.getElementById('userMode');
+ const adminMode=document.getElementById('adminMode');
+ const title=document.getElementById('loginTitle');
+ const subtitle=document.getElementById('loginSubtitle');
+ const note=document.getElementById('roleNote');
+ let role='user';
+ function setRole(next){
+   role=next;
+   cards.forEach(c=>{const active=c.dataset.role===role;c.classList.toggle('active',active);c.setAttribute('aria-pressed',String(active));});
+   const isAdmin=role==='admin'; document.getElementById('signupHeaderLink')?.classList.toggle('hidden',isAdmin);
+   userMode.classList.toggle('hidden',isAdmin);adminMode.classList.toggle('visible',isAdmin);
+   title.textContent=isAdmin?'Admin Control Center':'Welcome back';
+   subtitle.textContent=isAdmin?'Securely sign in to manage your Streamflix catalog.':'Choose how you want to sign in.';
+   note.textContent=isAdmin?'Administrator access opens the management dashboard.':'Sign in with your Streamflix member account.';
+   document.getElementById('loginEmail').required=!isAdmin;
+   document.getElementById('loginPassword').required=!isAdmin;
+   document.getElementById('adminUser').required=isAdmin;
+   document.getElementById('adminPass').required=isAdmin;
+   (isAdmin?document.getElementById('adminUser'):document.getElementById('loginEmail')).focus();
+ }
+ cards.forEach(c=>c.addEventListener('click',()=>setRole(c.dataset.role)));
+ document.querySelectorAll('.show-pass').forEach(btn=>btn.addEventListener('click',()=>{const input=document.getElementById(btn.dataset.target);input.type=input.type==='password'?'text':'password';btn.textContent=input.type==='password'?'Show':'Hide';}));
+ const saved=localStorage.getItem('streamflixRememberedEmail');
+ if(saved){document.getElementById('loginEmail').value=saved;document.getElementById('rememberMe').checked=true;}
+ document.getElementById('forgotPassword').addEventListener('click',e=>{e.preventDefault();alert('Password reset is a demo feature. Connect a secure backend email service to enable real recovery.')});
+ form.addEventListener('submit',e=>{
+   e.preventDefault();
+   if(role==='admin'){
+     const u=document.getElementById('adminUser').value.trim(),p=document.getElementById('adminPass').value;
+     if(u==='admin'&&p==='admin123'){
+       sessionStorage.setItem('streamflix_admin_auth','1');
+       sessionStorage.setItem('streamflix_login_role','admin');
+       location.replace('admin.html');
+     } else {alert('Incorrect admin username or password.');document.getElementById('adminPass').select();}
+     return;
+   }
+   const email=document.getElementById('loginEmail').value.trim();
+   if(document.getElementById('rememberMe').checked)localStorage.setItem('streamflixRememberedEmail',email);else localStorage.removeItem('streamflixRememberedEmail');
+   const existing=JSON.parse(localStorage.getItem('streamflixAccount')||'{}');
+   localStorage.setItem('streamflixAccount',JSON.stringify({...existing,name:existing.name||email.split('@')[0]||'Member',email}));
+   localStorage.setItem('streamflixLoggedIn','true');
+   sessionStorage.setItem('streamflix_login_role','user');
+   location.href='profiles.html';
+ });
+})();
+</script>
+</body>
+</html>

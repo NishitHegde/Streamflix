@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Subscription | Streamflix</title><link href="css/style.css" rel="stylesheet"/></head><body><nav class="navbar"><a class="navbar-logo" href="home.html">STREAMFLIX</a><div class="navbar-links"><a href="home.html">Home</a><a href="tvshows.html">TV Shows</a><a href="movies.html">Movies</a><a href="trending.html">Trending</a><a href="mylist.html">My List</a><a class="admin-nav-link" href="admin.html">⚙ Admin</a></div><div class="navbar-actions"><a href="search.html">⌕</a><a href="account.html">Account</a></div></nav><main class="subscription-page"><h1 style="text-align:center">Choose your plan</h1><p style="text-align:center;color:#888">Upgrade your entertainment experience.</p><div class="plans"><div class="plan"><h2>Basic</h2><div class="price">₹199 <span>/month</span></div><ul><li>HD streaming</li><li>1 device</li><li>Unlimited movies</li></ul><button class="btn outline" onclick="selectPlan('Basic','₹199/month')">Choose Basic</button></div><div class="plan featured"><h2>Standard</h2><div class="price">₹499 <span>/month</span></div><ul><li>Full HD streaming</li><li>2 devices</li><li>Downloads</li></ul><button class="btn primary" onclick="selectPlan('Standard','₹499/month')">Choose Standard</button></div><div class="plan"><h2>Premium</h2><div class="price">₹649 <span>/month</span></div><ul><li>4K + HDR</li><li>4 devices</li><li>Downloads</li></ul><button class="btn outline" onclick="selectPlan('Premium','₹649/month')">Choose Premium</button></div></div></main><footer class="footer footer-compact">
+<div class="footer-inner">
+<div class="footer-main">
+<a class="footer-logo" href="home.html">STREAMFLIX</a>
+<p>Movies, series and entertainment — all in one place.</p>
+<div class="footer-social social">
+<a aria-label="Facebook" href="#">f</a><a aria-label="X" href="#">𝕏</a><a aria-label="YouTube" href="#">▶</a><a aria-label="Instagram" href="#">◎</a>
+</div>
+</div>
+<div class="footer-mini-links">
+<a href="home.html">Home</a><a href="movies.html">Movies</a><a href="tvshows.html">TV Shows</a><a href="mylist.html">My List</a><a href="support.html">Help</a>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Streamflix</span>
+<span>Frontend demo • Artwork belongs to respective owners.</span>
+</div>
+</div>
+</footer><script src="js/app.js"></script><script src="js/movie-data.js"></script><script src="js/admin-sync.js"></script><script src="js/artwork.js"></script><script src="js/enhancer.js"></script><script>function selectPlan(plan,price){const a=JSON.parse(localStorage.getItem('streamflixAccount')||'{}');a.plan=plan;a.price=price;a.billing=a.billing||'Not scheduled';localStorage.setItem('streamflixAccount',JSON.stringify(a));alert(plan+' plan selected successfully. No real payment is charged in this demo.');location.href='account.html';}</script><script src="js/premium-ux.js"></script><script src="js/cinematic-hero.js"></script>
+</body></html>

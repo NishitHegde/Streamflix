@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="750" viewBox="0 0 500 750">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(141,75%,32%)"/><stop offset="1" stop-color="hsl(221,70%,12%)"/></linearGradient><radialGradient id="r"><stop stop-color="white" stop-opacity=".18"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient></defs>
+<rect width="500" height="750" fill="url(#g)"/><circle cx="400" cy="120" r="220" fill="url(#r)"/><circle cx="70" cy="620" r="260" fill="url(#r)"/>
+<rect x="28" y="28" width="444" height="694" rx="18" fill="none" stroke="white" stroke-opacity=".25" stroke-width="2"/>
+<text x="48" y="80" fill="white" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="4">STREAMFLIX</text>
+<text x="48" y="125" fill="white" fill-opacity=".75" font-family="Arial,sans-serif" font-size="16" letter-spacing="2">HINDI • COMEDY</text>
+<text x="48" y="520" fill="white" font-family="Arial,sans-serif" font-size="42" font-weight="800">Barfi!</text><text x="48" y="650" fill="white" fill-opacity=".85" font-family="Arial,sans-serif" font-size="18">Movie • 2012 • 7+</text><text x="48" y="682" fill="white" fill-opacity=".65" font-family="Arial,sans-serif" font-size="15">94% Match</text></svg>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>My List | Streamflix</title>
+<link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar">
+<a class="navbar-logo" href="home.html">
+        STREAMFLIX
+    </a>
+<div class="navbar-links">
+<a href="home.html">Home</a>
+<a href="tvshows.html">TV Shows</a>
+<a href="movies.html">Movies</a>
+<a href="trending.html">Trending</a>
+<a class="active" href="mylist.html">My List</a>
+</div>
+<div class="navbar-actions">
+<a href="search.html">⌕</a>
+<a href="profiles.html">Profile</a>
+</div>
+</nav>
+<!-- MY LIST -->
+<main class="mylist-page">
+<section class="mylist-header">
+<h1>My List</h1>
+<p>
+            Movies and TV shows you've added to your list
+        </p>
+</section>
+<!-- MOVIES WILL BE INSERTED HERE -->
+<section class="mylist-section">
+<div class="movie-grid mylist-grid" id="myListGrid">
+</div>
+<!-- EMPTY MESSAGE -->
+<div class="empty-mylist" id="emptyMyList" style="display:none;">
+<div class="empty-icon">
+                ♡
+            </div>
+<h2>Your list is empty</h2>
+<p>
+                Add movies and TV shows to watch them later.
+            </p>
+<div class="empty-buttons">
+<a class="btn primary" href="movies.html">
+                    Browse Movies
+                </a>
+<a class="btn dark" href="tvshows.html">
+                    Browse TV Shows
+                </a>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="footer footer-compact">
+<div class="footer-inner">
+<div class="footer-main">
+<a class="footer-logo" href="home.html">STREAMFLIX</a>
+<p>Movies, series and entertainment — all in one place.</p>
+<div class="footer-social social">
+<a aria-label="Facebook" href="#">f</a><a aria-label="X" href="#">𝕏</a><a aria-label="YouTube" href="#">▶</a><a aria-label="Instagram" href="#">◎</a>
+</div>
+</div>
+<div class="footer-mini-links">
+<a href="home.html">Home</a><a href="movies.html">Movies</a><a href="tvshows.html">TV Shows</a><a href="mylist.html">My List</a><a class="admin-nav-link" href="admin.html">⚙ Admin</a><a href="support.html">Help</a>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Streamflix</span>
+<span>Frontend demo • Artwork belongs to respective owners.</span>
+</div>
+</div>
+</footer>
+<!-- MOVIE DATA -->
+<script src="js/movie-data.js"></script><script src="js/admin-sync.js"></script><script src="js/artwork.js"></script>
+<!-- MY LIST SCRIPT -->
+<script src="js/mylist.js"></script>
+<script src="js/enhancer.js"></script><script src="js/premium-ux.js"></script><script src="js/cinematic-hero.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Account | Streamflix</title><link rel="stylesheet" href="css/style.css"></head>
+<body class="account-shell">
+<nav class="navbar"><a class="navbar-logo" href="home.html">STREAMFLIX</a><div class="navbar-links"><a href="home.html">Home</a><a href="tvshows.html">TV Shows</a><a href="movies.html">Movies</a><a href="trending.html">Trending</a><a href="mylist.html">My List</a><a class="admin-nav-link" href="admin.html">⚙ Admin</a></div><div class="navbar-actions"><a href="search.html">⌕</a><a href="profiles.html">Profiles</a></div></nav>
+<main class="account-page account-real">
+  <div class="account-heading"><div><p class="account-kicker">ACCOUNT</p><h1>Account</h1><p class="account-muted">Manage your membership, profile and viewing preferences.</p></div></div>
+
+  <section class="account-card account-summary">
+    <div class="summary-avatar" id="accountAvatar">N</div><div class="summary-main"><h2 id="accountName">Nishit</h2><p id="accountEmail">member@example.com</p><span class="account-badge">● Active membership</span></div><a class="btn primary" href="profiles.html">Switch profile</a>
+  </section>
+
+  <section class="settings-card">
+    <div class="settings-title"><h2>Membership & Billing</h2><p>Control your plan and payment details.</p></div>
+    <div class="setting-row"><div><strong>Plan</strong><span id="planText">Premium · ₹649/month</span></div><a class="setting-action" href="subscription.html">Change plan</a></div>
+    <div class="setting-row"><div><strong>Payment method</strong><span id="paymentText">No payment method added</span></div><button class="setting-action" data-action="payment">Manage</button></div>
+    <div class="setting-row"><div><strong>Billing date</strong><span id="billingText">Not scheduled</span></div><button class="setting-action" data-action="billing">View</button></div>
+  </section>
+
+  <section class="settings-card">
+    <div class="settings-title"><h2>Profile & Parental Controls</h2><p>Manage who can watch and what each profile can access.</p></div>
+    <div class="setting-row"><div><strong>Manage profiles</strong><span>Add, edit or remove profiles.</span></div><a class="setting-action" href="profiles.html">Manage</a></div>
+    <div class="setting-row"><div><strong>Profile PIN</strong><span id="pinText">Not enabled</span></div><button class="setting-action" data-action="pin">Change</button></div>
+    <div class="setting-row"><div><strong>Maturity restrictions</strong><span id="maturityText">All maturity levels</span></div><button class="setting-action" data-action="maturity">Edit</button></div>
+  </section>
+
+  <section class="settings-card">
+    <div class="settings-title"><h2>Playback Settings</h2><p>Your preferences are saved on this browser.</p></div>
+    <label class="setting-row toggle-row"><div><strong>Autoplay next episode</strong><span>Automatically start the next episode.</span></div><input type="checkbox" class="switch" id="autoplayNext"><span class="switch-ui"></span></label>
+    <label class="setting-row toggle-row"><div><strong>Autoplay previews</strong><span>Play previews while browsing.</span></div><input type="checkbox" class="switch" id="autoplayPreview"><span class="switch-ui"></span></label>
+    <div class="setting-row"><div><strong>Language</strong><span id="languageText">English</span></div><button class="setting-action" data-action="language">Change</button></div>
+  </section>
+
+  <section class="settings-card">
+    <div class="settings-title"><h2>Security & Privacy</h2><p>Keep your Streamflix account secure.</p></div>
+    <div class="setting-row"><div><strong>Password</strong><span>Last updated on this browser</span></div><button class="setting-action" data-action="password">Change</button></div>
+    <div class="setting-row"><div><strong>Sign out of all devices</strong><span>End all active Streamflix sessions.</span></div><button class="setting-action danger" data-action="allDevices">Sign out all devices</button></div>
+  </section>
+
+  <section class="settings-card danger-card"><div><h2>Account</h2><p>Delete your local Streamflix demo account and saved preferences.</p></div><button class="btn outline danger-btn" id="deleteAccountBtn">Delete account</button></section>
+
+<section class="settings-card admin-access-card">
+  <div class="settings-title"><h2>Admin</h2><p>Manage Streamflix content, users, trending titles and site settings.</p></div>
+  <div class="setting-row"><div><strong>Admin Control Center</strong><span>Open the Streamflix administration dashboard.</span></div><a class="setting-action admin-action" href="admin.html">Open Admin →</a></div>
+</section>
+</main>
+
+<div class="modal-backdrop" id="accountModal"><div class="account-modal"><button class="modal-close" id="modalClose">×</button><h2 id="modalTitle">Settings</h2><div id="modalBody"></div></div></div>
+<footer class="footer footer-compact"><div class="footer-inner"><div class="footer-main"><a class="footer-logo" href="home.html">STREAMFLIX</a><p>Movies, series and entertainment — all in one place.</p><div class="footer-social social"><a aria-label="Facebook" href="#">f</a><a aria-label="X" href="#">𝕏</a><a aria-label="YouTube" href="#">▶</a><a aria-label="Instagram" href="#">◎</a></div></div><div class="footer-mini-links"><a href="home.html">Home</a><a href="movies.html">Movies</a><a href="tvshows.html">TV Shows</a><a href="mylist.html">My List</a><a href="support.html">Help</a></div><div class="footer-bottom"><span>© 2026 Streamflix</span><span>Account demo · Settings saved locally</span></div></div><a class="btn dark" href="admin.html" style="display:inline-block;margin:20px">Admin Dashboard</a></footer>
+<script src="js/app.js"></script><script src="js/movie-data.js"></script><script src="js/admin-sync.js"></script><script src="js/artwork.js"></script><script src="js/account.js"></script>
+<script src="js/premium-ux.js"></script><script src="js/cinematic-hero.js"></script>
+</body></html>
