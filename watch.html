@@ -8,54 +8,88 @@
   <script>if(localStorage.getItem('sfTheme')==='light')document.documentElement.classList.add('sf-light');</script>
 </head>
 <body class="sf-player-page">
-  <main class="player-container">
-    <div class="player-top-bar" id="playerTopBar">
-      <a class="btn dark back-btn" id="backBtn">← Back</a>
+  <main class="player-container" id="playerContainer">
+    <!-- Top Header Bar -->
+    <header class="player-top-bar" id="playerTopBar">
+      <a class="btn dark back-btn" id="backBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <span>Back</span>
+      </a>
       <div class="player-title-wrap">
-        <h1 class="player-title" id="watchTitle">Streamflix Player</h1>
-        <span class="player-subtitle" id="watchSubtitle">Movie Stream</span>
+        <h1 class="player-title" id="watchTitle">Streamflix Video Player</h1>
+        <span class="player-subtitle" id="watchSubtitle">Loading title...</span>
       </div>
       <div class="player-top-actions">
         <select id="episodeSelect" class="episode-select" style="display:none;" aria-label="Select Episode"></select>
       </div>
-    </div>
-    
+    </header>
+
+    <!-- Stage & Video Player -->
     <div class="watch-stage" id="watchStage">
       <div class="video-wrapper" id="videoWrapper">
-        <video id="streamVideo" playsinline preload="metadata" aria-label="Streamflix Video Player"></video>
+        <video id="streamVideo" playsinline preload="auto" aria-label="Streamflix Video Player"></video>
         
+        <!-- Touch Ripple Animations for Double Tap -->
+        <div class="seek-ripple seek-ripple-left" id="rippleLeft"><span>↺ 10s</span></div>
+        <div class="seek-ripple seek-ripple-right" id="rippleRight"><span>↻ 10s</span></div>
+
+        <!-- Big Play Button Center Overlay -->
         <div class="video-overlay" id="videoOverlay">
-          <div class="big-play-circle" id="bigPlayBtn">▶</div>
+          <button class="big-play-btn" id="bigPlayBtn" aria-label="Play Video">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </button>
         </div>
 
+        <!-- Bottom Controls Bar -->
         <div class="video-controls-bar" id="videoControls">
-          <div class="progress-wrap" id="progressWrap">
+          <!-- Progress Scrub Bar -->
+          <div class="progress-wrap" id="progressWrap" role="slider" aria-label="Video Seek Bar">
             <div class="progress-buffered" id="progressBuffered"></div>
             <div class="progress-filled" id="progressFilled"></div>
             <div class="progress-handle" id="progressHandle"></div>
+            <div class="progress-tooltip" id="progressTooltip">00:00</div>
           </div>
-          
+
           <div class="controls-content">
             <div class="controls-left">
-              <button class="ctrl-btn" id="btnPlayPause" aria-label="Play or Pause">▶ Play</button>
-              <button class="ctrl-btn" id="btnRewind" aria-label="Rewind 10 seconds">↺ 10s</button>
-              <button class="ctrl-btn" id="btnForward" aria-label="Forward 10 seconds">↻ 10s</button>
-              <div class="volume-container">
-                <button class="ctrl-btn" id="btnMute" aria-label="Mute or Unmute">🔊</button>
-                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="1" aria-label="Volume Slider">
+              <button class="ctrl-btn main-play-btn" id="btnPlayPause" aria-label="Play/Pause">
+                <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <svg id="pauseIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              </button>
+              <button class="ctrl-btn" id="btnRewind" title="Rewind 10s">↺ 10s</button>
+              <button class="ctrl-btn" id="btnForward" title="Forward 10s">↻ 10s</button>
+              
+              <div class="volume-wrap">
+                <button class="ctrl-btn" id="btnMute" title="Mute/Unmute">
+                  <svg id="volHighIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  <svg id="volMuteIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><line x1="1" y1="1" x2="23" y2="23"/><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/></svg>
+                </button>
+                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="1" aria-label="Volume">
               </div>
+
               <span class="time-display" id="timeDisplay">00:00 / 00:00</span>
             </div>
-            
+
             <div class="controls-right">
-              <button class="ctrl-btn next-ep-btn" id="btnNextEp" style="display:none;" aria-label="Next Episode">⏭ Next Ep</button>
-              <select id="qualitySelect" class="ctrl-select" aria-label="Select Video Quality">
+              <button class="ctrl-btn next-ep-btn" id="btnNextEp" style="display:none;" title="Next Episode">⏭ Next Ep</button>
+              <select id="speedSelect" class="ctrl-select" title="Speed">
+                <option value="0.75">0.75x</option>
+                <option value="1" selected>1.0x (Normal)</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2.0x</option>
+              </select>
+              <select id="qualitySelect" class="ctrl-select" title="Quality">
                 <option value="1080">1080p HD</option>
                 <option value="720">720p</option>
                 <option value="480">480p</option>
               </select>
-              <button class="ctrl-btn" id="btnPip" aria-label="Picture in Picture">📺</button>
-              <button class="ctrl-btn" id="btnFullscreen" aria-label="Toggle Fullscreen">⛶</button>
+              <button class="ctrl-btn" id="btnPip" title="Picture in Picture">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><rect x="12" y="11" width="8" height="7" rx="1"/></svg>
+              </button>
+              <button class="ctrl-btn" id="btnFullscreen" title="Fullscreen">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              </button>
             </div>
           </div>
         </div>

@@ -12,13 +12,18 @@
   const videoOverlay = $('#videoOverlay');
   const bigPlayBtn = $('#bigPlayBtn');
   const btnPlayPause = $('#btnPlayPause');
+  const playIcon = $('#playIcon');
+  const pauseIcon = $('#pauseIcon');
   const btnRewind = $('#btnRewind');
   const btnForward = $('#btnForward');
   const btnMute = $('#btnMute');
+  const volHighIcon = $('#volHighIcon');
+  const volMuteIcon = $('#volMuteIcon');
   const volumeSlider = $('#volumeSlider');
   const timeDisplay = $('#timeDisplay');
   const btnNextEp = $('#btnNextEp');
   const episodeSelect = $('#episodeSelect');
+  const speedSelect = $('#speedSelect');
   const qualitySelect = $('#qualitySelect');
   const btnPip = $('#btnPip');
   const btnFullscreen = $('#btnFullscreen');
@@ -26,23 +31,36 @@
   const progressFilled = $('#progressFilled');
   const progressBuffered = $('#progressBuffered');
   const progressHandle = $('#progressHandle');
+  const progressTooltip = $('#progressTooltip');
   const watchTitle = $('#watchTitle');
   const watchSubtitle = $('#watchSubtitle');
   const backBtn = $('#backBtn');
   const playerTopBar = $('#playerTopBar');
   const videoControls = $('#videoControls');
+  const rippleLeft = $('#rippleLeft');
+  const rippleRight = $('#rippleRight');
 
   const KEY = 'sfProgress';
-  let currentEpisodeIndex = 0;
+  const FALLBACK_SOURCES = [
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+    "https://vjs.zencdn.net/v/oceans.mp4",
+    "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+  ];
+
+  let currentFallbackIdx = 0;
+  let currentEpisodeIdx = 0;
   let isTvSeries = m.type === 'TV Series' && Array.isArray(m.episodes) && m.episodes.length > 0;
   let hideControlsTimer = null;
+  let lastTapTime = 0;
 
-  // Title and Header setup
+  // Header Titles Setup
   if (watchTitle) watchTitle.textContent = m.title;
   if (watchSubtitle) watchSubtitle.textContent = isTvSeries ? (m.episodes[0]?.title || 'Series Stream') : `${m.type} • ${m.year} • ${m.duration || ''}`;
   if (backBtn) backBtn.href = `movie-details.html?id=${encodeURIComponent(id)}`;
 
-  // Episode Selection Setup
+  // Episodes Selection Setup
   if (isTvSeries && episodeSelect) {
     episodeSelect.style.display = 'inline-block';
     episodeSelect.innerHTML = m.episodes.map((ep, idx) => `<option value="${idx}">${ep.title}</option>`).join('');
@@ -50,63 +68,69 @@
     if (btnNextEp) {
       btnNextEp.style.display = m.episodes.length > 1 ? 'inline-flex' : 'none';
       btnNextEp.onclick = () => {
-        if (currentEpisodeIndex < m.episodes.length - 1) {
-          loadEpisode(currentEpisodeIndex + 1);
+        if (currentEpisodeIdx < m.episodes.length - 1) {
+          loadEpisode(currentEpisodeIdx + 1);
         }
       };
     }
   }
 
   function loadEpisode(idx) {
-    currentEpisodeIndex = idx;
+    currentEpisodeIdx = idx;
     const ep = isTvSeries ? m.episodes[idx] : null;
-    const streamUrl = ep ? ep.videoUrl : (m.videoUrl || 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
-    
-    if (watchSubtitle) watchSubtitle.textContent = ep ? ep.title : `${m.type} • ${m.year}`;
+    const primaryUrl = ep ? ep.videoUrl : (m.videoUrl || FALLBACK_SOURCES[0]);
+
+    if (watchSubtitle) watchSubtitle.textContent = ep ? ep.title : `${m.type} • ${m.year} • ${m.duration || ''}`;
     if (episodeSelect) episodeSelect.value = idx;
-    
-    video.src = streamUrl;
+
+    currentFallbackIdx = 0;
+    video.src = primaryUrl;
     video.poster = m.backdrop || m.poster || '';
     video.load();
     playVideo();
   }
 
-  // Load initial video source
-  loadEpisode(0);
+  // Automatic Video Error Fallback Recovery
+  video.addEventListener('error', () => {
+    console.warn("Primary stream failed, attempting fallback URL...");
+    currentFallbackIdx = (currentFallbackIdx + 1) % FALLBACK_SOURCES.length;
+    video.src = FALLBACK_SOURCES[currentFallbackIdx];
+    video.load();
+    playVideo();
+  });
 
-  // Restore saved watch progress if available
+  // Restore saved watch progress
   try {
     const store = JSON.parse(localStorage.getItem(KEY) || '{}');
     const savedPct = Number(store[id]?.value || 0);
-    if (savedPct > 0 && savedPct < 95) {
+    if (savedPct > 0 && savedPct < 96) {
       video.addEventListener('loadedmetadata', () => {
         if (video.duration) video.currentTime = (savedPct / 100) * video.duration;
       }, { once: true });
     }
   } catch {}
 
-  function formatTime(seconds) {
-    if (isNaN(seconds)) return '00:00';
-    const m = Math.floor(seconds / 60);
-    const s = Math.floor(seconds % 60);
-    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  function formatTime(sec) {
+    if (isNaN(sec) || !isFinite(sec)) return '00:00';
+    const mins = Math.floor(sec / 60);
+    const secs = Math.floor(sec % 60);
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   }
 
-  function updateProgress() {
+  function updateProgressUI() {
     if (!video.duration) return;
     const pct = (video.currentTime / video.duration) * 100;
     if (progressFilled) progressFilled.style.width = `${pct}%`;
     if (progressHandle) progressHandle.style.left = `${pct}%`;
     if (timeDisplay) timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
 
-    // Buffer bar
+    // Buffer percentage
     if (video.buffered.length > 0 && progressBuffered) {
-      const bufferedEnd = video.buffered.end(video.buffered.length - 1);
-      const bufPct = (bufferedEnd / video.duration) * 100;
-      progressBuffered.style.width = `${bufPct}%`;
+      const bufEnd = video.buffered.end(video.buffered.length - 1);
+      progressBuffered.style.width = `${(bufEnd / video.duration) * 100}%`;
     }
 
-    // Persist progress to localStorage
+    // Store playback progress
     try {
       const store = JSON.parse(localStorage.getItem(KEY) || '{}');
       store[id] = {
@@ -123,22 +147,26 @@
 
   function playVideo() {
     video.play().then(() => {
-      videoOverlay.style.opacity = '0';
-      videoOverlay.style.pointerEvents = 'none';
-      if (btnPlayPause) btnPlayPause.textContent = '❚❚ Pause';
+      if (videoOverlay) videoOverlay.style.opacity = '0';
+      if (videoOverlay) videoOverlay.style.pointerEvents = 'none';
+      if (playIcon) playIcon.style.display = 'none';
+      if (pauseIcon) pauseIcon.style.display = 'inline-block';
       resetControlsTimeout();
     }).catch(() => {
-      videoOverlay.style.opacity = '1';
-      videoOverlay.style.pointerEvents = 'auto';
-      if (btnPlayPause) btnPlayPause.textContent = '▶ Play';
+      // Browser blocked unmuted autoplay
+      if (videoOverlay) videoOverlay.style.opacity = '1';
+      if (videoOverlay) videoOverlay.style.pointerEvents = 'auto';
+      if (playIcon) playIcon.style.display = 'inline-block';
+      if (pauseIcon) pauseIcon.style.display = 'none';
     });
   }
 
   function pauseVideo() {
     video.pause();
-    videoOverlay.style.opacity = '1';
-    videoOverlay.style.pointerEvents = 'auto';
-    if (btnPlayPause) btnPlayPause.textContent = '▶ Play';
+    if (videoOverlay) videoOverlay.style.opacity = '1';
+    if (videoOverlay) videoOverlay.style.pointerEvents = 'auto';
+    if (playIcon) playIcon.style.display = 'inline-block';
+    if (pauseIcon) pauseIcon.style.display = 'none';
     showControls();
   }
 
@@ -147,7 +175,7 @@
     else pauseVideo();
   }
 
-  // Controls Auto-Hide Behavior
+  // Auto-Hiding Controls Manager
   function showControls() {
     if (playerTopBar) playerTopBar.style.opacity = '1';
     if (videoControls) videoControls.style.opacity = '1';
@@ -164,29 +192,69 @@
     }
   }
 
-  // Event Listeners
-  if (bigPlayBtn) bigPlayBtn.onclick = togglePlay;
-  if (videoOverlay) videoOverlay.onclick = togglePlay;
-  if (btnPlayPause) btnPlayPause.onclick = togglePlay;
-  if (video) video.onclick = togglePlay;
+  // Event Handlers
+  if (bigPlayBtn) bigPlayBtn.onclick = (e) => { e.stopPropagation(); togglePlay(); };
+  if (btnPlayPause) btnPlayPause.onclick = (e) => { e.stopPropagation(); togglePlay(); };
 
-  video.addEventListener('timeupdate', updateProgress);
+  video.addEventListener('timeupdate', updateProgressUI);
   video.addEventListener('ended', () => {
     pauseVideo();
-    if (isTvSeries && currentEpisodeIndex < m.episodes.length - 1) {
+    if (isTvSeries && currentEpisodeIdx < m.episodes.length - 1) {
       if (window.sfToast) window.sfToast('Playing Next Episode…');
-      setTimeout(() => loadEpisode(currentEpisodeIndex + 1), 1500);
+      setTimeout(() => loadEpisode(currentEpisodeIdx + 1), 1200);
     }
   });
 
-  if (btnRewind) btnRewind.onclick = () => { video.currentTime = Math.max(0, video.currentTime - 10); showControls(); };
-  if (btnForward) btnForward.onclick = () => { video.currentTime = Math.min(video.duration || 0, video.currentTime + 10); showControls(); };
+  if (btnRewind) btnRewind.onclick = () => { video.currentTime = Math.max(0, video.currentTime - 10); showControls(); triggerRipple(rippleLeft); };
+  if (btnForward) btnForward.onclick = () => { video.currentTime = Math.min(video.duration || 0, video.currentTime + 10); showControls(); triggerRipple(rippleRight); };
 
+  function triggerRipple(el) {
+    if (!el) return;
+    el.classList.remove('active');
+    void el.offsetWidth;
+    el.classList.add('active');
+    setTimeout(() => el.classList.remove('active'), 600);
+  }
+
+  // Double Tap & Touch Controls
+  if (videoWrapper) {
+    videoWrapper.addEventListener('click', (e) => {
+      if (e.target.closest('#videoControls, #playerTopBar, .big-play-btn')) return;
+
+      const now = Date.now();
+      const timeDiff = now - lastTapTime;
+      const rect = videoWrapper.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+
+      if (timeDiff < 300) {
+        // Double tap gesture
+        if (clickX < rect.width * 0.35) {
+          video.currentTime = Math.max(0, video.currentTime - 10);
+          triggerRipple(rippleLeft);
+        } else if (clickX > rect.width * 0.65) {
+          video.currentTime = Math.min(video.duration || 0, video.currentTime + 10);
+          triggerRipple(rippleRight);
+        } else {
+          togglePlay();
+        }
+      } else {
+        togglePlay();
+      }
+      lastTapTime = now;
+      showControls();
+    });
+
+    videoWrapper.onmousemove = showControls;
+  }
+
+  // Volume & Mute
   if (btnMute) {
     btnMute.onclick = () => {
       video.muted = !video.muted;
-      btnMute.textContent = video.muted ? '🔇' : '🔊';
+      if (volHighIcon) volHighIcon.style.display = video.muted ? 'none' : 'inline-block';
+      if (volMuteIcon) volMuteIcon.style.display = video.muted ? 'inline-block' : 'none';
       if (volumeSlider) volumeSlider.value = video.muted ? 0 : video.volume;
+      showControls();
     };
   }
 
@@ -194,23 +262,44 @@
     volumeSlider.oninput = (e) => {
       video.volume = parseFloat(e.target.value);
       video.muted = video.volume === 0;
-      if (btnMute) btnMute.textContent = video.muted ? '🔇' : '🔊';
+      if (volHighIcon) volHighIcon.style.display = video.muted ? 'none' : 'inline-block';
+      if (volMuteIcon) volMuteIcon.style.display = video.muted ? 'inline-block' : 'none';
+      showControls();
     };
   }
 
-  // Progress Bar Seek Interaction
+  // Speed Selector
+  if (speedSelect) {
+    speedSelect.onchange = (e) => {
+      video.playbackRate = parseFloat(e.target.value);
+      showControls();
+    };
+  }
+
+  // Progress Bar Scrub & Hover Tooltip
   if (progressWrap) {
-    const seek = (e) => {
+    const getPos = e => {
       const rect = progressWrap.getBoundingClientRect();
-      const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      if (video.duration) video.currentTime = pos * video.duration;
+      return Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
     };
 
-    progressWrap.onclick = seek;
-    let isDragging = false;
-    progressWrap.onmousedown = () => { isDragging = true; };
-    window.addEventListener('mousemove', (e) => { if (isDragging) seek(e); });
-    window.addEventListener('mouseup', () => { isDragging = false; });
+    progressWrap.onclick = (e) => {
+      if (video.duration) video.currentTime = getPos(e) * video.duration;
+    };
+
+    progressWrap.onmousemove = (e) => {
+      if (!video.duration) return;
+      const pos = getPos(e);
+      if (progressTooltip) {
+        progressTooltip.style.left = `${pos * 100}%`;
+        progressTooltip.textContent = formatTime(pos * video.duration);
+        progressTooltip.style.opacity = '1';
+      }
+    };
+
+    progressWrap.onmouseleave = () => {
+      if (progressTooltip) progressTooltip.style.opacity = '0';
+    };
   }
 
   // Fullscreen
@@ -223,22 +312,31 @@
       } else {
         if (document.exitFullscreen) document.exitFullscreen();
       }
+      showControls();
     };
   }
 
-  // Picture in Picture
+  // Picture-in-Picture
   if (btnPip) {
     btnPip.onclick = async () => {
       try {
         if (document.pictureInPictureElement) await document.exitPictureInPicture();
         else if (video.requestPictureInPicture) await video.requestPictureInPicture();
-      } catch (err) {}
+      } catch (e) {}
     };
   }
 
-  // Mouse & Touch Activity Tracking
-  if (videoWrapper) {
-    videoWrapper.onmousemove = showControls;
-    videoWrapper.ontouchstart = showControls;
-  }
+  // Keyboard Shortcuts (Space, F, M, Left, Right Arrow)
+  window.addEventListener('keydown', (e) => {
+    if (['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+
+    if (e.code === 'Space' || e.key === 'k') { e.preventDefault(); togglePlay(); }
+    else if (e.key === 'f') { e.preventDefault(); btnFullscreen?.click(); }
+    else if (e.key === 'm') { e.preventDefault(); btnMute?.click(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); video.currentTime = Math.max(0, video.currentTime - 5); triggerRipple(rippleLeft); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); video.currentTime = Math.min(video.duration || 0, video.currentTime + 5); triggerRipple(rippleRight); }
+    showControls();
+  });
+
+  loadEpisode(0);
 })();

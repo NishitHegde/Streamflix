@@ -2028,3 +2028,391 @@ body.sf-light .sf-hero-vignette {
     width: 100% !important;
   }
 }
+
+/* =========================================================
+   STREAMFLIX CINEMATIC NATIVE VIDEO PLAYER STYLES
+   ========================================================= */
+.sf-player-page {
+  background: #000000 !important;
+  color: #ffffff !important;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+}
+
+.player-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  background: #000000;
+}
+
+.player-top-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+  z-index: 120;
+  transition: opacity 0.35s ease;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px !important;
+  padding: 8px 16px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  backdrop-filter: blur(14px);
+  font-size: 13px !important;
+}
+
+.back-btn:hover {
+  background: rgba(229, 9, 20, 0.85) !important;
+  border-color: #e50914 !important;
+  transform: translateX(-2px);
+}
+
+.player-title-wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  text-align: center;
+}
+
+.player-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+}
+
+.player-subtitle {
+  font-size: 12px;
+  color: #a9a9b2;
+  margin-top: 2px;
+}
+
+.episode-select, .ctrl-select {
+  background: rgba(20, 20, 25, 0.85);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  outline: none;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: border-color 0.2s ease;
+}
+
+.episode-select:hover, .ctrl-select:hover {
+  border-color: #e50914;
+}
+
+.watch-stage {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #000000;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+  overflow: hidden;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000000;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 50;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.big-play-btn {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 0;
+  background: linear-gradient(135deg, #e50914, #ff3040);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 45px rgba(229, 9, 20, 0.6);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.big-play-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 16px 55px rgba(229, 9, 20, 0.8);
+}
+
+.video-controls-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 28px 24px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.96) 0%, rgba(0, 0, 0, 0.6) 70%, transparent 100%);
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: opacity 0.35s ease;
+}
+
+.progress-wrap {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: height 0.15s ease;
+}
+
+.progress-wrap:hover {
+  height: 10px;
+}
+
+.progress-buffered {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.38);
+  border-radius: 6px;
+  width: 0%;
+}
+
+.progress-filled {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #e50914, #ff3040);
+  border-radius: 6px;
+  width: 0%;
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.6);
+}
+
+.progress-handle {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s ease;
+}
+
+.progress-wrap:hover .progress-handle {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.progress-tooltip {
+  position: absolute;
+  top: -34px;
+  transform: translateX(-50%);
+  background: rgba(15, 15, 20, 0.9);
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.controls-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.controls-left, .controls-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ctrl-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.ctrl-btn:hover {
+  background: #e50914;
+  border-color: #e50914;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.main-play-btn {
+  background: #e50914;
+  border-color: #e50914;
+  padding: 8px 18px;
+}
+
+.main-play-btn:hover {
+  background: #ff2a38;
+}
+
+.volume-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.volume-slider {
+  width: 75px;
+  height: 4px;
+  accent-color: #e50914;
+  cursor: pointer;
+}
+
+.time-display {
+  font-size: 12px;
+  color: #d0d0d8;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.next-ep-btn {
+  background: linear-gradient(135deg, #e50914, #b0060d);
+  border: 0;
+}
+
+/* Double-Tap Seek Ripples */
+.seek-ripple {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.seek-ripple.active {
+  animation: ripplePop 0.55s ease;
+}
+
+.seek-ripple-left { left: 15%; }
+.seek-ripple-right { right: 15%; }
+
+.seek-ripple span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+@keyframes ripplePop {
+  0% { opacity: 0; transform: translateY(-50%) scale(0.7); }
+  50% { opacity: 1; transform: translateY(-50%) scale(1.1); }
+  100% { opacity: 0; transform: translateY(-50%) scale(1.2); }
+}
+
+@media (max-width: 768px) {
+  .player-top-bar {
+    height: 56px;
+    padding: 0 14px;
+  }
+  .player-title {
+    font-size: 14px;
+  }
+  .video-controls-bar {
+    padding: 12px 14px 16px;
+  }
+  .volume-slider {
+    display: none;
+  }
+  .time-display {
+    font-size: 11px;
+  }
+  .ctrl-btn {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+  .big-play-btn {
+    width: 68px;
+    height: 68px;
+  }
+}
+
+@media (max-width: 480px) {
+  #btnRewind, #btnForward {
+    display: none;
+  }
+  .ctrl-select, .next-ep-btn {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+}
