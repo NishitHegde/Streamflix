@@ -7,9 +7,18 @@
   const backdrop=m=>m?.backdrop||m?.poster||'';
 
   function card(id,m,rank){
-    const rankHtml=rank?`<div class="rank-number" aria-hidden="true">${rank}</div>`:'';
-    return `<article class="home-card ${rank?'rank-card':''}" data-home-id="${safe(id)}" tabindex="0" aria-label="Open ${safe(m.title)}">
-      ${rankHtml}<div class="home-card-poster"><img src="${safe(poster(m))}" data-sf-id="${safe(id)}" alt="${safe(m.title)}" loading="lazy" onerror="this.onerror=null;this.src='assets/posters/poster-1.svg';this.classList.add('artwork-failed')">
+    if(rank){
+      return `<article class="trend-card" data-home-id="${safe(id)}" tabindex="0" aria-label="Open ${safe(m.title)}">
+        <div class="trend-num">${rank}</div>
+        <div class="trend-poster">
+          <img src="${safe(poster(m))}" data-sf-id="${safe(id)}" alt="${safe(m.title)}" loading="lazy" onerror="this.onerror=null;this.src='assets/posters/poster-1.svg';this.classList.add('artwork-failed')">
+          <div class="home-card-actions"><button type="button" data-home-play="${safe(id)}" aria-label="Play ${safe(m.title)}">▶</button><button type="button" data-home-add="${safe(id)}" aria-label="Add ${safe(m.title)} to My List">＋</button></div>
+        </div>
+        <div class="trend-card-info"><strong>${safe(m.title)}</strong><span>${safe(m.type==='TV Series'?'TV Series':'Movie')} • ${safe(m.rating||'16+')}</span></div>
+      </article>`;
+    }
+    return `<article class="home-card" data-home-id="${safe(id)}" tabindex="0" aria-label="Open ${safe(m.title)}">
+      <div class="home-card-poster"><img src="${safe(poster(m))}" data-sf-id="${safe(id)}" alt="${safe(m.title)}" loading="lazy" onerror="this.onerror=null;this.src='assets/posters/poster-1.svg';this.classList.add('artwork-failed')">
         <div class="home-card-actions"><button type="button" data-home-play="${safe(id)}" aria-label="Play ${safe(m.title)}">▶</button><button type="button" data-home-add="${safe(id)}" aria-label="Add ${safe(m.title)} to My List">＋</button></div>
       </div><div class="home-card-copy"><h3 class="home-card-title">${safe(m.title)}</h3><div class="home-card-meta"><span class="match">${safe(m.match||'90%')} Match</span><span>${safe(m.year||'')}</span><span>${safe(m.type==='TV Series'?'Series':'Movie')}</span></div></div>
     </article>`;
@@ -18,7 +27,8 @@
   function rail(title,sub,entries,opts={}){
     if(!entries.length)return '';
     const cards=entries.slice(0,opts.limit||12).map(([id,m],i)=>card(id,m,opts.rank?i+1:null)).join('');
-    return `<section class="home-rail ${opts.className||''}"><div class="home-rail-head"><div><h2>${safe(title)}</h2>${sub?`<p>${safe(sub)}</p>`:''}</div>${opts.link?`<a class="home-see-all" href="${opts.link}">See all →</a>`:''}</div><div class="home-rail-row">${cards}</div></section>`;
+    const rowClass = opts.rank ? 'top10-row trending-row' : 'home-rail-row';
+    return `<section class="home-rail ${opts.className||''}"><div class="home-rail-head"><div><h2>${safe(title)}</h2>${sub?`<p>${safe(sub)}</p>`:''}</div>${opts.link?`<a class="home-see-all" href="${opts.link}">See all →</a>`:''}</div><div class="${rowClass}">${cards}</div></section>`;
   }
 
   function init(){
@@ -32,7 +42,7 @@
     const newHot=[...all].sort((a,b)=>(parseInt(b[1].year)||0)-(parseInt(a[1].year)||0));
     const rails=$('#homeRails'); if(!rails)return;
     rails.innerHTML=
-      rail('Top 10 on Streamflix','The titles everyone is talking about right now.',trending,{rank:true,className:'home-numbered',limit:10,link:'trending.html'})+
+      rail('Top 10 on Streamflix','The titles everyone is talking about right now.',trending,{rank:true,className:'top10-section',limit:10,link:'trending.html'})+
       rail('Popular on Streamflix','Fan favorites across movies and series.',all,{limit:12})+
       (hindi.length?rail('Hindi Spotlight','Popular Hindi entertainment, all in one place.',hindi,{limit:10}):'')+
       rail('New & Hot','Fresh picks for your next watch.',newHot,{limit:12})+
