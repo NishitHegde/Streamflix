@@ -18,7 +18,7 @@ if(sessionStorage.getItem('streamflix_admin_auth')==='1'){
   location.replace('admin.html');
 }
 </script>
-</head>
+<script>if(localStorage.getItem('sfTheme')==='light')document.documentElement.classList.add('sf-light');</script></head>
 <body>
 <div class="auth-page">
 <header class="auth-header"><a class="auth-logo" href="index.html">STREAMFLIX</a><a id="signupHeaderLink" class="btn outline" href="signup.html">Sign Up</a></header>

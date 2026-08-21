@@ -35,14 +35,27 @@
     if(actions){
       const searchLink=$('a[href="search.html"]',actions);
       if(searchLink) searchLink.classList.add('sf-nav-icon'), searchLink.setAttribute('aria-label','Search');
+      const sunIcon=`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+      const moonIcon=`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+      const isLight=localStorage.getItem('sfTheme')==='light';
       const theme=document.createElement('button');
-      theme.className='sf-theme-btn';theme.type='button';theme.title='Toggle theme';theme.textContent=localStorage.getItem('sfTheme')==='light'?'☀':'◐';
-      theme.onclick=()=>{document.body.classList.toggle('sf-light');const light=document.body.classList.contains('sf-light');localStorage.setItem('sfTheme',light?'light':'dark');theme.textContent=light?'☀':'◐';toast(light?'Light mode enabled':'Dark mode enabled')};
+      theme.className='sf-theme-btn';theme.type='button';theme.title='Toggle theme';theme.setAttribute('aria-label','Toggle theme');
+      theme.innerHTML=isLight?moonIcon:sunIcon;
+      theme.onclick=()=>{
+        const light=document.body.classList.toggle('sf-light');
+        document.documentElement.classList.toggle('sf-light',light);
+        localStorage.setItem('sfTheme',light?'light':'dark');
+        theme.innerHTML=light?moonIcon:sunIcon;
+        toast(light?'Light mode enabled':'Dark mode enabled');
+      };
       actions.prepend(theme);
       const profile=$('a[href="profiles.html"]',actions);
       if(profile){profile.classList.add('sf-avatar');profile.textContent=(localStorage.getItem('streamflixProfile')||'N').slice(0,1).toUpperCase();profile.title='Profiles'}
     }
-    if(localStorage.getItem('sfTheme')==='light')document.body.classList.add('sf-light');
+    if(localStorage.getItem('sfTheme')==='light'){
+      document.body.classList.add('sf-light');
+      document.documentElement.classList.add('sf-light');
+    }
   }
 
   // Scroll effects + back-to-top
