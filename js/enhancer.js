@@ -296,4 +296,162 @@ function toggleList(id){
   $$('.btn, a').forEach(a=>{
     if(a.getAttribute('href')==='subscription.html')a.addEventListener('click',()=>toast('Opening plans…'));
   });
+
+  // =========================================================
+  // FAST-MOVING PREMIUM NEON STARFIELD ENGINE
+  // =========================================================
+  (() => {
+    if (document.getElementById('sfNeonStarfield')) return;
+    const canvas = document.createElement('canvas');
+    canvas.id = 'sfNeonStarfield';
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1;opacity:0.95;';
+    document.body.prepend(canvas);
+
+    const ctx = canvas.getContext('2d');
+    let width = 0, height = 0;
+    let particles = [];
+    let shootingStars = [];
+
+    const NEON_COLORS = [
+      { r: 229, g: 9,   b: 20  }, // Neon Red
+      { r: 168, g: 85,  b: 247 }, // Bright Violet / Purple
+      { r: 0,   g: 210, b: 255 }, // Neon Cyan
+      { r: 255, g: 255, b: 255 }, // Bright Star White
+      { r: 255, g: 70,  b: 95  }  // Soft Crimson
+    ];
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initParticles();
+    }
+
+    function initParticles() {
+      const isMobile = width < 768;
+      const count = isMobile ? 48 : 120;
+      particles = [];
+
+      for (let i = 0; i < count; i++) {
+        const colorObj = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)];
+        const sizeCategory = Math.random();
+        let radius = 1.2;
+        let glow = 6;
+
+        if (sizeCategory > 0.85) {
+          radius = 3.2 + Math.random() * 1.5; // Larger glowing stars
+          glow = 14;
+        } else if (sizeCategory > 0.5) {
+          radius = 2.0 + Math.random() * 1.0; // Medium stars
+          glow = 9;
+        } else {
+          radius = 0.9 + Math.random() * 0.8; // Tiny crisp stars
+          glow = 5;
+        }
+
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          r: radius,
+          glow: glow,
+          color: colorObj,
+          vx: (Math.random() - 0.5) * 1.2,
+          vy: -(0.3 + Math.random() * 1.4), // Fast upward/floating drift
+          baseAlpha: 0.6 + Math.random() * 0.38,
+          twinkleSpeed: 0.02 + Math.random() * 0.05,
+          twinklePhase: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    function createShootingStar() {
+      if (shootingStars.length >= 2) return;
+      const startX = Math.random() * width * 0.8;
+      const startY = Math.random() * height * 0.5;
+      const angle = (Math.PI / 6) + (Math.random() * Math.PI / 6); // 30-60 deg
+      const speed = 14 + Math.random() * 10;
+      const colorObj = NEON_COLORS[Math.floor(Math.random() * 3)];
+
+      shootingStars.push({
+        x: startX,
+        y: startY,
+        length: 70 + Math.random() * 70,
+        speedX: Math.cos(angle) * speed,
+        speedY: Math.sin(angle) * speed,
+        alpha: 1,
+        color: colorObj
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Render Floating Neon Stars
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        p.x += p.vx;
+        p.y += p.vy;
+        p.twinklePhase += p.twinkleSpeed;
+
+        // Wrap edges smoothly
+        if (p.y < -10) { p.y = height + 10; p.x = Math.random() * width; }
+        if (p.x < -10) p.x = width + 10;
+        if (p.x > width + 10) p.x = -10;
+
+        const currentAlpha = Math.max(0.2, Math.min(1, p.baseAlpha + Math.sin(p.twinklePhase) * 0.35));
+        const rgbaStr = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${currentAlpha.toFixed(2)})`;
+
+        ctx.save();
+        ctx.shadowBlur = p.glow;
+        ctx.shadowColor = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, 0.85)`;
+        ctx.fillStyle = rgbaStr;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Render Shooting Stars
+      for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const s = shootingStars[i];
+        s.x += s.speedX;
+        s.y += s.speedY;
+        s.alpha -= 0.022;
+
+        if (s.alpha <= 0 || s.x > width || s.y > height) {
+          shootingStars.splice(i, 1);
+          continue;
+        }
+
+        const tailX = s.x - (s.speedX * 3.5);
+        const tailY = s.y - (s.speedY * 3.5);
+
+        const grad = ctx.createLinearGradient(s.x, s.y, tailX, tailY);
+        grad.addColorStop(0, `rgba(${s.color.r}, ${s.color.g}, ${s.color.b}, ${s.alpha})`);
+        grad.addColorStop(1, `rgba(${s.color.r}, ${s.color.g}, ${s.color.b}, 0)`);
+
+        ctx.save();
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2.2;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = `rgba(${s.color.r}, ${s.color.g}, ${s.color.b}, 0.9)`;
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(tailX, tailY);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // Random shooting star trigger (~every 4s)
+      if (Math.random() < 0.007) {
+        createShootingStar();
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(animate);
+  })();
 })();
