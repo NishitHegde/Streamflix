@@ -2416,3 +2416,163 @@ body.sf-light .sf-hero-vignette {
     padding: 6px 8px;
   }
 }
+
+/* ==========================================================================
+   ANIMATED BACKGROUND & SMALL COMPACT ICONS & MOBILE FRIENDLY POLISH
+   ========================================================================== */
+
+/* 1. Subtle Animated Ambient Glow Background */
+@keyframes sfAmbientGlow {
+  0% { background-position: 0% 50%, 100% 50%, 50% 0%; }
+  50% { background-position: 100% 50%, 0% 50%, 50% 100%; }
+  100% { background-position: 0% 50%, 100% 50%, 50% 0%; }
+}
+
+body {
+  background-color: var(--sf-bg, #070708) !important;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(229, 9, 20, 0.12), transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(130, 30, 220, 0.08), transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.05), transparent 60%) !important;
+  background-size: 200% 200%, 200% 200%, 180% 180% !important;
+  animation: sfAmbientGlow 22s ease infinite !important;
+}
+
+html.sf-light body, body.sf-light {
+  background-color: #f4f5f8 !important;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(229, 9, 20, 0.07), transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(0, 120, 255, 0.05), transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(229, 9, 20, 0.04), transparent 60%) !important;
+  background-size: 200% 200%, 200% 200%, 180% 180% !important;
+  animation: sfAmbientGlow 22s ease infinite !important;
+}
+
+/* 2. Compact & Elegant Icon Sizes */
+.sf-nav-icon, .sf-theme-btn, .sf-menu-btn {
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 13px !important;
+  border-radius: 50% !important;
+}
+
+.sf-theme-btn svg, .sf-nav-icon svg, .sf-menu-btn svg {
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.sf-avatar {
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 12px !important;
+}
+
+.movie-card .overlay button, .overlay button, .home-card-actions button {
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 12px !important;
+}
+
+.quick-icon {
+  width: 34px !important;
+  height: 34px !important;
+  font-size: 15px !important;
+  border-radius: 10px !important;
+}
+
+.cast-avatar {
+  width: 68px !important;
+  height: 68px !important;
+  min-width: 68px !important;
+  font-size: 18px !important;
+  margin-bottom: 6px !important;
+}
+
+.footer-compact .footer-social a, .social a {
+  width: 30px !important;
+  height: 30px !important;
+  font-size: 12px !important;
+}
+
+.ctrl-btn {
+  padding: 6px 11px !important;
+  font-size: 12px !important;
+  border-radius: 6px !important;
+}
+
+.ctrl-btn svg {
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.big-play-btn, .big-play-circle {
+  width: 64px !important;
+  height: 64px !important;
+}
+
+.big-play-btn svg {
+  width: 26px !important;
+  height: 26px !important;
+}
+
+/* 3. Mobile Friendly Typography & Layout Enhancements */
+@media (max-width: 768px) {
+  .navbar {
+    height: 58px !important;
+    padding: 0 14px !important;
+  }
+
+  .navbar-logo, .logo {
+    font-size: 20px !important;
+  }
+
+  .navbar-links {
+    top: 58px !important;
+    padding: 12px !important;
+    gap: 4px !important;
+  }
+
+  .navbar-links a {
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .section {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .section-title {
+    font-size: 19px !important;
+  }
+
+  .sf-chips, .filters, .trend-filters {
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+
+  .sf-chip, .filter, .trend-filter {
+    padding: 7px 13px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .movie-info h3, .home-card-title {
+    font-size: 13px !important;
+  }
+
+  .meta, .home-card-meta {
+    font-size: 10px !important;
+  }
+
+  .sf-modal-card, .account-modal, .modal-card, .sf-signup-dialog {
+    padding: 20px !important;
+    border-radius: 14px !important;
+  }
+}
