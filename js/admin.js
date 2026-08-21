@@ -59,7 +59,7 @@
     const x=id?catalog()[id]:{type:type||'Movie',language:'Hindi',rating:'13+',match:'90%',genres:'Drama',cast:[]};
     $('#editId').value=id||''; $('#fTitle').value=x.title||''; $('#fType').value=x.type||'Movie'; $('#fYear').value=x.year||''; $('#fLanguage').value=x.language||'Hindi'; $('#fRating').value=x.rating||'13+'; $('#fMatch').value=x.match||'90%';
     $('#fPoster').value=(x.poster||'').startsWith('data:')?'':(x.poster||''); $('#fBackdrop').value=(x.backdrop||'').startsWith('data:')?'':(x.backdrop||'');
-    $('#fPosterFile').value=''; $('#fBackdropFile').value=''; $('#fTrailer').value=x.trailer||''; $('#fGenres').value=x.genres||''; $('#fCast').value=(x.cast||[]).join(', '); $('#fDescription').value=x.description||'';
+    $('#fPosterFile').value=''; $('#fBackdropFile').value=''; $('#fTrailer').value=x.videoUrl||x.trailer||''; $('#fGenres').value=x.genres||''; $('#fCast').value=(x.cast||[]).join(', '); $('#fDescription').value=x.description||'';
     setTimeout(()=>$('#fTitle').focus(),60);
   }
   function closeModal(){const f=$('#contentForm'); if(f)f.reset(); $('#editId').value=''; editing=null; setModalOpen(false);}
@@ -81,7 +81,8 @@
     const posterUpload=await readFile($('#fPosterFile').files[0]), backdropUpload=await readFile($('#fBackdropFile').files[0]);
     const poster=posterUpload||$('#fPoster').value.trim()||old.poster||`assets/posters/poster-1.svg`;
     const backdrop=backdropUpload||$('#fBackdrop').value.trim()||old.backdrop||poster;
-    c[id]={...old,id,title,type,year:year||String(new Date().getFullYear()),rating:$('#fRating').value.trim()||'13+',match:$('#fMatch').value.trim()||'90%',language:$('#fLanguage').value.trim()||'English',poster,backdrop,genres:$('#fGenres').value.trim()||'Drama',cast:$('#fCast').value.split(',').map(x=>x.trim()).filter(Boolean),description:$('#fDescription').value.trim(),trailer:$('#fTrailer').value.trim()};
+    const videoUrl=$('#fTrailer').value.trim()||old.videoUrl||'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+    c[id]={...old,id,title,type,year:year||String(new Date().getFullYear()),rating:$('#fRating').value.trim()||'13+',match:$('#fMatch').value.trim()||'90%',language:$('#fLanguage').value.trim()||'English',poster,backdrop,genres:$('#fGenres').value.trim()||'Drama',cast:$('#fCast').value.split(',').map(x=>x.trim()).filter(Boolean),description:$('#fDescription').value.trim(),videoUrl};
     try{Admin().saveCatalog(c); closeModal(); renderAll(); toast(editing?'Content updated successfully':'New content added successfully'); switchSection('content');}catch(err){toast('Could not save. Browser storage may be full.');}
   });
   function renderUsers(){let users=[];try{users=JSON.parse(localStorage.getItem('streamflix_users')||'[]')}catch(e){} if(!users.length)users=[{id:'demo',name:'Demo User',email:'demo@streamflix.local',plan:'Premium',status:'Active'}]; $('#userRows').innerHTML=users.map((u,i)=>`<tr><td>${escapeHtml(u.name||u.username||'User '+(i+1))}</td><td>${escapeHtml(u.email||'—')}</td><td>${escapeHtml(u.plan||'Free')}</td><td>${escapeHtml(u.status||'Active')}</td><td><button class="mini" data-toggle-user="${escapeHtml(u.id||i)}">${(u.status||'Active')==='Active'?'Deactivate':'Activate'}</button></td></tr>`).join('')}

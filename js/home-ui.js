@@ -44,7 +44,7 @@
     const [pid,pm]=pick;
     const spotlight=document.createElement('section');
     spotlight.className='home-spotlight';
-    spotlight.innerHTML=`<div class="home-spotlight-bg" style="background-image:url('${safe(backdrop(pm))}')"></div><div class="home-spotlight-content"><div class="home-spotlight-kicker">STREAMFLIX SPOTLIGHT</div><h2>${safe(pm.title)}</h2><p>${safe(pm.description||pm.overview||'Discover a fan-favorite story with original artwork, trailers and a premium viewing experience.')}</p><div class="home-spotlight-actions"><a class="primary" href="watch.html?id=${encodeURIComponent(pid)}">▶ Play Now</a><a class="secondary" href="movie-details.html?id=${encodeURIComponent(pid)}">ⓘ More Info</a></div></div>`;
+    spotlight.innerHTML=`<div class="home-spotlight-bg" style="background-image:url('${safe(backdrop(pm))}')"></div><div class="home-spotlight-content"><div class="home-spotlight-kicker">STREAMFLIX SPOTLIGHT</div><h2>${safe(pm.title)}</h2><p>${safe(pm.description||pm.overview||'Discover a fan-favorite story with original artwork, full streaming video and a premium viewing experience.')}</p><div class="home-spotlight-actions"><a class="primary" href="watch.html?id=${encodeURIComponent(pid)}">▶ Play Now</a><a class="secondary" href="movie-details.html?id=${encodeURIComponent(pid)}">ⓘ More Info</a></div></div>`;
     rails.appendChild(spotlight);
 
     const end=document.createElement('div');end.className='home-end';end.innerHTML='<strong>Ready for your next story?</strong><p>Explore the full Streamflix library and find something worth watching.</p><a href="movies.html">Browse All Titles</a>';rails.appendChild(end);

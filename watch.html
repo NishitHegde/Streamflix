@@ -1,2 +1,71 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Watch | Streamflix</title><link rel="stylesheet" href="css/style.css"><script>if(localStorage.getItem('sfTheme')==='light')document.documentElement.classList.add('sf-light');</script></head><body><main class="player"><div class="player-top"><a class="btn dark" id="backBtn">← Back</a><span class="player-title" id="watchTitle">Loading...</span></div><div class="watch-stage" id="watchStage"><div class="watch-bg-overlay"></div><div class="fake-player" id="streamPlayer"><img id="watchPoster" alt=""><iframe id="mainTrailer" class="main-trailer" title="Official trailer" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen frameborder="0"></iframe><div class="play-circle" id="demoPlay">▶</div><div class="sf-player-controls"><button id="watchPlay">▶ Play</button><button id="watchMute">🔊</button><button id="watchFull">⛶</button></div><div class="sf-player-progress"><span id="watchProgressBar"></span></div><p id="playerHint">Official trailer • Press Play to watch</p></div></div></main><script src="js/movie-data.js"></script><script src="js/admin-sync.js"></script><script src="js/artwork.js"></script><script src="js/player.js"></script><script src="js/enhancer.js"></script><script src="js/premium-ux.js"></script><script src="js/cinematic-hero.js"></script>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Watch | Streamflix</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>if(localStorage.getItem('sfTheme')==='light')document.documentElement.classList.add('sf-light');</script>
+</head>
+<body class="sf-player-page">
+  <main class="player-container">
+    <div class="player-top-bar" id="playerTopBar">
+      <a class="btn dark back-btn" id="backBtn">← Back</a>
+      <div class="player-title-wrap">
+        <h1 class="player-title" id="watchTitle">Streamflix Player</h1>
+        <span class="player-subtitle" id="watchSubtitle">Movie Stream</span>
+      </div>
+      <div class="player-top-actions">
+        <select id="episodeSelect" class="episode-select" style="display:none;" aria-label="Select Episode"></select>
+      </div>
+    </div>
+    
+    <div class="watch-stage" id="watchStage">
+      <div class="video-wrapper" id="videoWrapper">
+        <video id="streamVideo" playsinline preload="metadata" aria-label="Streamflix Video Player"></video>
+        
+        <div class="video-overlay" id="videoOverlay">
+          <div class="big-play-circle" id="bigPlayBtn">▶</div>
+        </div>
+
+        <div class="video-controls-bar" id="videoControls">
+          <div class="progress-wrap" id="progressWrap">
+            <div class="progress-buffered" id="progressBuffered"></div>
+            <div class="progress-filled" id="progressFilled"></div>
+            <div class="progress-handle" id="progressHandle"></div>
+          </div>
+          
+          <div class="controls-content">
+            <div class="controls-left">
+              <button class="ctrl-btn" id="btnPlayPause" aria-label="Play or Pause">▶ Play</button>
+              <button class="ctrl-btn" id="btnRewind" aria-label="Rewind 10 seconds">↺ 10s</button>
+              <button class="ctrl-btn" id="btnForward" aria-label="Forward 10 seconds">↻ 10s</button>
+              <div class="volume-container">
+                <button class="ctrl-btn" id="btnMute" aria-label="Mute or Unmute">🔊</button>
+                <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="1" aria-label="Volume Slider">
+              </div>
+              <span class="time-display" id="timeDisplay">00:00 / 00:00</span>
+            </div>
+            
+            <div class="controls-right">
+              <button class="ctrl-btn next-ep-btn" id="btnNextEp" style="display:none;" aria-label="Next Episode">⏭ Next Ep</button>
+              <select id="qualitySelect" class="ctrl-select" aria-label="Select Video Quality">
+                <option value="1080">1080p HD</option>
+                <option value="720">720p</option>
+                <option value="480">480p</option>
+              </select>
+              <button class="ctrl-btn" id="btnPip" aria-label="Picture in Picture">📺</button>
+              <button class="ctrl-btn" id="btnFullscreen" aria-label="Toggle Fullscreen">⛶</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/movie-data.js"></script>
+  <script src="js/admin-sync.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/enhancer.js"></script>
+</body>
+</html>
