@@ -300,12 +300,13 @@ function toggleList(id){
   // =========================================================
   // FAST-MOVING PREMIUM NEON STARFIELD ENGINE
   // =========================================================
-  (() => {
+  const mountStarfield = () => {
     if (document.getElementById('sfNeonStarfield')) return;
     const canvas = document.createElement('canvas');
     canvas.id = 'sfNeonStarfield';
     canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:-1;opacity:0.95;';
-    document.body.prepend(canvas);
+    const parent = document.body || document.documentElement;
+    if (parent) parent.prepend(canvas);
 
     const ctx = canvas.getContext('2d');
     let width = 0, height = 0;
@@ -453,5 +454,10 @@ function toggleList(id){
     window.addEventListener('resize', resize);
     resize();
     requestAnimationFrame(animate);
-  })();
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountStarfield);
+  }
+  mountStarfield();
 })();
