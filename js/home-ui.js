@@ -11,14 +11,14 @@
       return `<article class="trend-card" data-home-id="${safe(id)}" tabindex="0" aria-label="Open ${safe(m.title)}">
         <div class="trend-num">${rank}</div>
         <div class="trend-poster">
-          <img src="${safe(poster(m))}" data-sf-id="${safe(id)}" alt="${safe(m.title)}" loading="lazy" onerror="this.onerror=null;this.src='assets/posters/poster-1.svg';this.classList.add('artwork-failed')">
+          <img src="${safe(poster(m))}" data-sf-id="${safe(id)}" alt="${safe(m.title)}" loading="lazy" onerror="this.onerror=null;this.src='https://image.tmdb.org/t/p/w500/8tZYtuWezp8Fiu1zR2xSIkGudtn.jpg'">
           <div class="home-card-actions"><button type="button" data-home-play="${safe(id)}" aria-label="Play ${safe(m.title)}">▶</button><button type="button" data-home-add="${safe(id)}" aria-label="Add ${safe(m.title)} to My List">＋</button></div>
         </div>
         <div class="trend-card-info"><strong>${safe(m.title)}</strong><span>${safe(m.type==='TV Series'?'TV Series':'Movie')} • ${safe(m.rating||'16+')}</span></div>
       </article>`;
     }
     return `<article class="home-card" data-home-id="${safe(id)}" tabindex="0" aria-label="Open ${safe(m.title)}">
-      <div class="home-card-poster"><img src="${safe(poster(m))}" data-sf-id="${safe(id)}" alt="${safe(m.title)}" loading="lazy" onerror="this.onerror=null;this.src='assets/posters/poster-1.svg';this.classList.add('artwork-failed')">
+      <div class="home-card-poster"><img src="${safe(poster(m))}" data-sf-id="${safe(id)}" alt="${safe(m.title)}" loading="lazy" onerror="this.onerror=null;this.src='https://image.tmdb.org/t/p/w500/8tZYtuWezp8Fiu1zR2xSIkGudtn.jpg'">
         <div class="home-card-actions"><button type="button" data-home-play="${safe(id)}" aria-label="Play ${safe(m.title)}">▶</button><button type="button" data-home-add="${safe(id)}" aria-label="Add ${safe(m.title)} to My List">＋</button></div>
       </div><div class="home-card-copy"><h3 class="home-card-title">${safe(m.title)}</h3><div class="home-card-meta"><span class="match">${safe(m.match||'90%')} Match</span><span>${safe(m.year||'')}</span><span>${safe(m.type==='TV Series'?'Series':'Movie')}</span></div></div>
     </article>`;

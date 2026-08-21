@@ -1,14 +1,10 @@
 (() => {
   const SAMPLES = [
+    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
-    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
+    "https://vjs.zencdn.net/v/oceans.mp4",
+    "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
   ];
 
   window.MOVIES = {
@@ -20,7 +16,7 @@
       "match": "96%",
       "duration": "45m / ep",
       "poster": "https://image.tmdb.org/t/p/w500/9PFonBhy4cQy7Jz20NpMygczOkv.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/9PFonBhy4cQy7Jz20NpMygczOkv.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/iHSwvR6Z3gcn9v8qeePjVjdfB20.jpg",
       "cast": ["Jenna Ortega", "Catherine Zeta-Jones", "Luis Guzmán", "Emma Myers"],
       "genres": "Mystery • Comedy • Fantasy",
       "language": "English",
@@ -29,8 +25,7 @@
       "episodes": [
         { "id": 1, "title": "S1:E1 Wednesday's Child Is Full of Woe", "duration": "51m", "videoUrl": SAMPLES[0] },
         { "id": 2, "title": "S1:E2 Woe Is the Loneliest Number", "duration": "48m", "videoUrl": SAMPLES[1] },
-        { "id": 3, "title": "S1:E3 Friend or Woe", "duration": "47m", "videoUrl": SAMPLES[2] },
-        { "id": 4, "title": "S1:E4 Woe What a Night", "duration": "49m", "videoUrl": SAMPLES[3] }
+        { "id": 3, "title": "S1:E3 Friend or Woe", "duration": "47m", "videoUrl": SAMPLES[2] }
       ]
     },
     "2": {
@@ -49,8 +44,7 @@
       "videoUrl": SAMPLES[1],
       "episodes": [
         { "id": 1, "title": "S1:E1 Chapter One: The Vanishing of Will Byers", "duration": "48m", "videoUrl": SAMPLES[1] },
-        { "id": 2, "title": "S1:E2 Chapter Two: The Weirdo on Maple Street", "duration": "55m", "videoUrl": SAMPLES[2] },
-        { "id": 3, "title": "S1:E3 Chapter Three: Holly, Jolly", "duration": "51m", "videoUrl": SAMPLES[0] }
+        { "id": 2, "title": "S1:E2 Chapter Two: The Weirdo on Maple Street", "duration": "55m", "videoUrl": SAMPLES[2] }
       ]
     },
     "3": {
@@ -61,7 +55,7 @@
       "match": "94%",
       "duration": "47m / ep",
       "poster": "https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/gVZngivY0p9xO9mN3Z0c4eL4P4p.jpg",
       "cast": ["Álvaro Morte", "Úrsula Corberó", "Pedro Alonso", "Itziar Ituño"],
       "genres": "Crime • Drama • Thriller",
       "language": "English",
@@ -80,15 +74,14 @@
       "match": "93%",
       "duration": "55m / ep",
       "poster": "https://image.tmdb.org/t/p/w500/dDlEmu3EZ0Pgg93K2SVNLCjCSvE.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/dDlEmu3EZ0Pgg93K2SVNLCjCSvE.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/oaGsgm9kmYVwViPCv80Pj26mOH0.jpg",
       "cast": ["Lee Jung-jae", "Jung Ho-yeon", "Wi Ha-jun", "Park Hae-soo"],
       "genres": "Drama • Thriller • Mystery",
       "language": "English",
       "description": "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits with deadly high stakes.",
       "videoUrl": SAMPLES[3],
       "episodes": [
-        { "id": 1, "title": "S1:E1 Red Light, Green Light", "duration": "60m", "videoUrl": SAMPLES[3] },
-        { "id": 2, "title": "S1:E2 Hell", "duration": "62m", "videoUrl": SAMPLES[4] }
+        { "id": 1, "title": "S1:E1 Red Light, Green Light", "duration": "60m", "videoUrl": SAMPLES[3] }
       ]
     },
     "5": {
@@ -104,11 +97,7 @@
       "genres": "Drama • Crime • Thriller",
       "language": "English",
       "description": "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student.",
-      "videoUrl": SAMPLES[4],
-      "episodes": [
-        { "id": 1, "title": "S1:E1 Pilot", "duration": "58m", "videoUrl": SAMPLES[4] },
-        { "id": 2, "title": "S1:E2 Cat's in the Bag...", "duration": "48m", "videoUrl": SAMPLES[5] }
-      ]
+      "videoUrl": SAMPLES[4]
     },
     "6": {
       "title": "Interstellar",
@@ -123,7 +112,7 @@
       "genres": "Sci-Fi • Drama • Adventure",
       "language": "English",
       "description": "When Earth becomes uninhabitable, a team of ex-NASA pilots travels through a wormhole in search of a new home for humanity.",
-      "videoUrl": SAMPLES[5]
+      "videoUrl": SAMPLES[0]
     },
     "7": {
       "title": "Avatar",
@@ -133,12 +122,12 @@
       "match": "90%",
       "duration": "2h 42m",
       "poster": "https://image.tmdb.org/t/p/w500/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/vL5LR6WdxWPjLPFRLe133jXWsh5.jpg",
       "cast": ["Sam Worthington", "Zoe Saldaña", "Sigourney Weaver", "Stephen Lang"],
       "genres": "Action • Adventure • Fantasy",
       "language": "English",
       "description": "A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
-      "videoUrl": SAMPLES[6]
+      "videoUrl": SAMPLES[1]
     },
     "8": {
       "title": "The Dark Knight",
@@ -153,7 +142,7 @@
       "genres": "Action • Crime • Drama",
       "language": "English",
       "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological tests of his ability.",
-      "videoUrl": SAMPLES[7]
+      "videoUrl": SAMPLES[2]
     },
     "9": {
       "title": "Pulp Fiction",
@@ -168,7 +157,7 @@
       "genres": "Crime • Drama",
       "language": "English",
       "description": "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
-      "videoUrl": SAMPLES[8]
+      "videoUrl": SAMPLES[3]
     },
     "10": {
       "title": "Parasite",
@@ -178,12 +167,12 @@
       "match": "95%",
       "duration": "2h 12m",
       "poster": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/hiKmpWiSmZ me32h4z8aGg97m6y4.jpg",
       "cast": ["Song Kang-ho", "Lee Sun-kyun", "Cho Yeo-jeong", "Choi Woo-shik"],
       "genres": "Drama • Thriller",
       "language": "English",
       "description": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.",
-      "videoUrl": SAMPLES[0]
+      "videoUrl": SAMPLES[4]
     },
     "11": {
       "title": "The Green Mile",
@@ -193,12 +182,12 @@
       "match": "94%",
       "duration": "3h 09m",
       "poster": "https://image.tmdb.org/t/p/w500/o0lO84GI7qrG6XFvtsPOSV7CTNa.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/o0lO84GI7qrG6XFvtsPOSV7CTNa.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/l6hQWH9oVTy8ToBG19vE3NWAY2u.jpg",
       "cast": ["Tom Hanks", "Michael Clarke Duncan", "David Morse", "Bonnie Hunt"],
       "genres": "Drama • Fantasy • Crime",
       "language": "English",
       "description": "A death row head guard discovers a mysterious inmate possesses an extraordinary healing gift.",
-      "videoUrl": SAMPLES[1]
+      "videoUrl": SAMPLES[0]
     },
     "12": {
       "title": "Mad Max: Fury Road",
@@ -208,12 +197,12 @@
       "match": "93%",
       "duration": "2h 00m",
       "poster": "https://image.tmdb.org/t/p/w500/8tZYtuWezp8Fiu1zR2xSIkGudtn.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/8tZYtuWezp8Fiu1zR2xSIkGudtn.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/nlCh1mF8mG2WOFGlhVPsfwFiWCh.jpg",
       "cast": ["Tom Hardy", "Charlize Theron", "Nicholas Hoult", "Hugh Keays-Byrne"],
       "genres": "Action • Adventure • Sci-Fi",
       "language": "English",
       "description": "In a post-apocalyptic wasteland, a woman rebels against a tyrannical ruler in search for her homeland with the aid of a group of female prisoners.",
-      "videoUrl": SAMPLES[2]
+      "videoUrl": SAMPLES[1]
     },
     "13": {
       "title": "Guardians of the Galaxy",
@@ -223,12 +212,12 @@
       "match": "92%",
       "duration": "2h 01m",
       "poster": "https://image.tmdb.org/t/p/w500/y31QB9kn3XSudA15tV7UWQ9XLuW.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/y31QB9kn3XSudA15tV7UWQ9XLuW.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/iY8N4aW6W7xS4Z7kY7g1X2J3K4L.jpg",
       "cast": ["Chris Pratt", "Zoe Saldaña", "Dave Bautista", "Vin Diesel"],
       "genres": "Action • Comedy • Sci-Fi",
       "language": "English",
       "description": "A group of intergalactic criminals must pull together to stop a fanatical warrior with plans to purge the universe.",
-      "videoUrl": SAMPLES[3]
+      "videoUrl": SAMPLES[2]
     },
     "14": {
       "title": "Deadpool 2",
@@ -238,12 +227,12 @@
       "match": "91%",
       "duration": "1h 59m",
       "poster": "https://image.tmdb.org/t/p/w500/to0spRl1CMDvyUbOnbb4fTk3VAd.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/to0spRl1CMDvyUbOnbb4fTk3VAd.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/3P52oz9OWwW3StwKGfGfZiG2pX.jpg",
       "cast": ["Ryan Reynolds", "Josh Brolin", "Zazie Beetz", "Morena Baccarin"],
       "genres": "Action • Comedy • Adventure",
       "language": "English",
-      "description": "Wisecracking mercenary Deadpool assembles a team of fellow mutant rogues to protect a young boy with supernatural abilities from the brutal, time-traveling cyborg Cable.",
-      "videoUrl": SAMPLES[4]
+      "description": "Wisecracking mercenary Deadpool assembles a team of fellow mutant rogues to protect a young boy with supernatural abilities from the brutal cyborg Cable.",
+      "videoUrl": SAMPLES[3]
     },
     "15": {
       "title": "The Matrix",
@@ -257,8 +246,8 @@
       "cast": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss", "Hugo Weaving"],
       "genres": "Action • Sci-Fi",
       "language": "English",
-      "description": "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth — the life he knows is the elaborate deception of an evil cyber-intelligence.",
-      "videoUrl": SAMPLES[5]
+      "description": "When a computer hacker Neo discovers the shocking truth — the life he knows is the elaborate deception of an evil cyber-intelligence.",
+      "videoUrl": SAMPLES[4]
     },
     "16": {
       "title": "John Wick",
@@ -268,12 +257,12 @@
       "match": "93%",
       "duration": "1h 41m",
       "poster": "https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/umC04Cozevu8w3PiochBOIZxSZ5.jpg",
       "cast": ["Keanu Reeves", "Michael Nyqvist", "Alfie Allen", "Willem Dafoe"],
       "genres": "Action • Thriller",
       "language": "English",
       "description": "An ex-hitman comes out of retirement to track down the gangsters that killed his dog and took everything from him.",
-      "videoUrl": SAMPLES[6]
+      "videoUrl": SAMPLES[0]
     },
     "17": {
       "title": "The Queen's Gambit",
@@ -283,16 +272,12 @@
       "match": "90%",
       "duration": "60m / ep",
       "poster": "https://image.tmdb.org/t/p/w500/zU0htwkhNvBQdVSIKB9s6hgVeFK.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/zU0htwkhNvBQdVSIKB9s6hgVeFK.jpg",
-      "cast": ["Anya Taylor-Joy", "Thomas Brodie-Sangster", "Moses Ingram", "Marielle Heller"],
+      "backdrop": "https://image.tmdb.org/t/p/original/34OGjFEoHjKaEvydAfB935ChB1P.jpg",
+      "cast": ["Anya Taylor-Joy", "Thomas Brodie-Sangster", "Moses Ingram"],
       "genres": "Drama • TV",
       "language": "English",
-      "description": "Orphaned at the tender age of nine, prodigious introvert Beth Harmon discovers and masterminds the game of chess in 1960s America.",
-      "videoUrl": SAMPLES[7],
-      "episodes": [
-        { "id": 1, "title": "S1:E1 Openings", "duration": "56m", "videoUrl": SAMPLES[7] },
-        { "id": 2, "title": "S1:E2 Exchanges", "duration": "65m", "videoUrl": SAMPLES[8] }
-      ]
+      "description": "Orphaned at nine, prodigious introvert Beth Harmon discovers and masterminds the game of chess in 1960s America.",
+      "videoUrl": SAMPLES[1]
     },
     "18": {
       "title": "Black Mirror",
@@ -303,15 +288,11 @@
       "duration": "60m / ep",
       "poster": "https://image.tmdb.org/t/p/w500/7PRddO7z7mcPi21nZTCMGShAyy1.jpg",
       "backdrop": "https://image.tmdb.org/t/p/original/7PRddO7z7mcPi21nZTCMGShAyy1.jpg",
-      "cast": ["Daniel Lapaine", "Hannah John-Kamen", "Jon Hamm", "Mackenzie Davis"],
+      "cast": ["Daniel Lapaine", "Jon Hamm", "Mackenzie Davis"],
       "genres": "Sci-Fi • Drama • Thriller",
       "language": "English",
-      "description": "An anthology series exploring a twisted, high-tech multiverse where humanity's greatest innovations and darkest instincts collide.",
-      "videoUrl": SAMPLES[8],
-      "episodes": [
-        { "id": 1, "title": "S1:E1 The National Anthem", "duration": "44m", "videoUrl": SAMPLES[8] },
-        { "id": 2, "title": "S1:E2 Fifteen Million Merits", "duration": "62m", "videoUrl": SAMPLES[0] }
-      ]
+      "description": "An anthology series exploring a twisted, high-tech multiverse where humanity's greatest innovations collide.",
+      "videoUrl": SAMPLES[2]
     },
     "19": {
       "title": "Kabhi Khushi Kabhie Gham",
@@ -324,9 +305,9 @@
       "language": "Hindi",
       "cast": ["Amitabh Bachchan", "Shah Rukh Khan", "Kajol", "Hrithik Roshan"],
       "poster": "https://image.tmdb.org/t/p/w500/l95101JqY216d6X1pA5jNfNq34l.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/l95101JqY216d6X1pA5jNfNq34l.jpg",
-      "description": "After marrying a poor woman, rich Rahul is disowned by his father and moves to London to build a new life. Years later, his younger brother attempts to reunite the family.",
-      "videoUrl": SAMPLES[0]
+      "backdrop": "https://image.tmdb.org/t/p/original/l95101JqY216d6X1pA5jNfNq34l.jpg",
+      "description": "After marrying a poor woman, rich Rahul is disowned by his father and moves to London to build a new life.",
+      "videoUrl": SAMPLES[3]
     },
     "20": {
       "title": "3 Idiots",
@@ -339,9 +320,9 @@
       "language": "Hindi",
       "cast": ["Aamir Khan", "R. Madhavan", "Sharman Joshi", "Kareena Kapoor"],
       "poster": "https://image.tmdb.org/t/p/w500/66A9wPu2otZa32YmWyC8Fq9yUdF.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/66A9wPu2otZa32YmWyC8Fq9yUdF.jpg",
-      "description": "Two friends search for their long-lost companion while recollecting their college days and the inspiring lessons taught by their free-spirited classmate.",
-      "videoUrl": SAMPLES[1]
+      "backdrop": "https://image.tmdb.org/t/p/original/u724a9m5a2y9a2W2a2f2f2.jpg",
+      "description": "Two friends search for their long-lost companion while recollecting their college days.",
+      "videoUrl": SAMPLES[4]
     },
     "21": {
       "title": "Dangal",
@@ -352,11 +333,11 @@
       "duration": "2h 41m",
       "genres": "Drama • Sports • Family",
       "language": "Hindi",
-      "cast": ["Aamir Khan", "Fatima Sana Shaikh", "Sanya Malhotra", "Sakshi Tanwar"],
+      "cast": ["Aamir Khan", "Fatima Sana Shaikh", "Sanya Malhotra"],
       "poster": "https://image.tmdb.org/t/p/w500/5W66v2qD24W1v5yU81F9k54G2Ww.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/5W66v2qD24W1v5yU81F9k54G2Ww.jpg",
-      "description": "Former wrestler Mahavir Singh Phogat trains his daughters Geeta and Babita to become world-class female wrestlers against societal odds.",
-      "videoUrl": SAMPLES[2]
+      "backdrop": "https://image.tmdb.org/t/p/original/5W66v2qD24W1v5yU81F9k54G2Ww.jpg",
+      "description": "Former wrestler Mahavir Singh Phogat trains his daughters Geeta and Babita to become world-class wrestlers.",
+      "videoUrl": SAMPLES[0]
     },
     "22": {
       "title": "Zindagi Na Milegi Dobara",
@@ -369,9 +350,9 @@
       "language": "Hindi",
       "cast": ["Hrithik Roshan", "Farhan Akhtar", "Abhay Deol", "Katrina Kaif"],
       "poster": "https://image.tmdb.org/t/p/w500/6rE8c5bF89W231xS2W3aF23f2fW.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/6rE8c5bF89W231xS2W3aF23f2fW.jpg",
-      "description": "Three friends embark on a bachelor road trip across Spain that turns into an opportunity to mend fences, heal wounds, and fall in love.",
-      "videoUrl": SAMPLES[3]
+      "backdrop": "https://image.tmdb.org/t/p/original/6rE8c5bF89W231xS2W3aF23f2fW.jpg",
+      "description": "Three friends embark on a bachelor road trip across Spain that turns into an opportunity to mend fences.",
+      "videoUrl": SAMPLES[1]
     },
     "23": {
       "title": "Yeh Jawaani Hai Deewani",
@@ -382,11 +363,11 @@
       "duration": "2h 40m",
       "genres": "Romance • Comedy • Drama",
       "language": "Hindi",
-      "cast": ["Ranbir Kapoor", "Deepika Padukone", "Aditya Roy Kapur", "Kalki Koechlin"],
+      "cast": ["Ranbir Kapoor", "Deepika Padukone", "Aditya Roy Kapur"],
       "poster": "https://image.tmdb.org/t/p/w500/k29B7Z265f2z1S22W34W2x2f2f2.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/k29B7Z265f2z1S22W34W2x2f2f2.jpg",
-      "description": "Kabir and Naina bond during a trekking trip. Before Naina can express her feelings, Kabir leaves to pursue his career. They cross paths years later at a friend's wedding.",
-      "videoUrl": SAMPLES[4]
+      "backdrop": "https://image.tmdb.org/t/p/original/k29B7Z265f2z1S22W34W2x2f2f2.jpg",
+      "description": "Kabir and Naina bond during a trekking trip and cross paths years later at a friend's wedding.",
+      "videoUrl": SAMPLES[2]
     },
     "24": {
       "title": "Jawan",
@@ -397,11 +378,11 @@
       "duration": "2h 49m",
       "genres": "Action • Thriller • Crime",
       "language": "Hindi",
-      "cast": ["Shah Rukh Khan", "Nayanthara", "Vijay Sethupathi", "Deepika Padukone"],
-      "poster": "https://image.tmdb.org/t/p/w500/pA0V2w7a45g67S8Ww4x4k2.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/pA0V2w7a45g67S8Ww4x4k2.jpg",
-      "description": "A high-octane action thriller outlining the emotional journey of a man set to rectify the wrongs in society with a team of skilled women.",
-      "videoUrl": SAMPLES[5]
+      "cast": ["Shah Rukh Khan", "Nayanthara", "Vijay Sethupathi"],
+      "poster": "https://image.tmdb.org/t/p/w500/9PFonBhy4cQy7Jz20NpMygczOkv.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/iHSwvR6Z3gcn9v8qeePjVjdfB20.jpg",
+      "description": "A high-octane action thriller outlining the emotional journey of a man set to rectify the wrongs in society.",
+      "videoUrl": SAMPLES[3]
     },
     "25": {
       "title": "Pathaan",
@@ -412,68 +393,11 @@
       "duration": "2h 26m",
       "genres": "Action • Thriller • Spy",
       "language": "Hindi",
-      "cast": ["Shah Rukh Khan", "Deepika Padukone", "John Abraham", "Dimple Kapadia"],
-      "poster": "https://image.tmdb.org/t/p/w500/kY914v1k8eW8z5W2a2f2f2f2.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/kY914v1k8eW8z5W2a2f2f2f2.jpg",
+      "cast": ["Shah Rukh Khan", "Deepika Padukone", "John Abraham"],
+      "poster": "https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/gVZngivY0p9xO9mN3Z0c4eL4P4p.jpg",
       "description": "An exiled RAW agent takes on a ruthless mercenary leader who has a deadly threat against India.",
-      "videoUrl": SAMPLES[6]
-    },
-    "39": {
-      "title": "The Family Man",
-      "type": "TV Series",
-      "year": "2019",
-      "rating": "16+",
-      "match": "97%",
-      "duration": "45m / ep",
-      "genres": "Action • Drama • Thriller • Crime",
-      "language": "Hindi",
-      "cast": ["Manoj Bajpayee", "Priyamani", "Sharib Hashmi", "Samantha Ruth Prabhu"],
-      "poster": "https://image.tmdb.org/t/p/w500/y69sWw4x4k2k2f2f2f2f2.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/y69sWw4x4k2k2f2f2f2f2.jpg",
-      "description": "A working-class man works for a special cell of the National Investigation Agency while trying to protect his family from his secret, dangerous job.",
-      "videoUrl": SAMPLES[7],
-      "episodes": [
-        { "id": 1, "title": "S1:E1 The Family Man", "duration": "45m", "videoUrl": SAMPLES[7] },
-        { "id": 2, "title": "S1:E2 Sleepers", "duration": "42m", "videoUrl": SAMPLES[8] }
-      ]
-    },
-    "40": {
-      "title": "Panchayat",
-      "type": "TV Series",
-      "year": "2020",
-      "rating": "7+",
-      "match": "99%",
-      "duration": "35m / ep",
-      "genres": "Comedy • Drama • Family",
-      "language": "Hindi",
-      "cast": ["Jitendra Kumar", "Raghubir Yadav", "Neena Gupta", "Chandan Roy"],
-      "poster": "https://image.tmdb.org/t/p/w500/z69sWw4x4k2k2f2f2f2f2.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/z69sWw4x4k2k2f2f2f2f2.jpg",
-      "description": "An engineering graduate takes up a job as a Panchayat secretary in a remote village in Uttar Pradesh due to a lack of better job options.",
-      "videoUrl": SAMPLES[8],
-      "episodes": [
-        { "id": 1, "title": "S1:E1 Gram Panchayat Phulera", "duration": "35m", "videoUrl": SAMPLES[8] },
-        { "id": 2, "title": "S1:E2 Bhootha Ped", "duration": "33m", "videoUrl": SAMPLES[0] }
-      ]
-    },
-    "41": {
-      "title": "Mirzapur",
-      "type": "TV Series",
-      "year": "2018",
-      "rating": "18+",
-      "match": "95%",
-      "duration": "50m / ep",
-      "genres": "Crime • Drama • Thriller",
-      "language": "Hindi",
-      "cast": ["Pankaj Tripathi", "Ali Fazal", "Divyendu Sharma", "Shweta Tripathi"],
-      "poster": "https://image.tmdb.org/t/p/w500/a69sWw4x4k2k2f2f2f2f2.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/a69sWw4x4k2k2f2f2f2f2.jpg",
-      "description": "A shocking incident at a wedding procession ignites a series of events entangling two families in the lawless city of Mirzapur.",
-      "videoUrl": SAMPLES[0],
-      "episodes": [
-        { "id": 1, "title": "S1:E1 Jharoka", "duration": "48m", "videoUrl": SAMPLES[0] },
-        { "id": 2, "title": "S1:E2 Gooda", "duration": "52m", "videoUrl": SAMPLES[1] }
-      ]
+      "videoUrl": SAMPLES[4]
     }
   };
 })();
