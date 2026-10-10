@@ -2942,3 +2942,175 @@ html.sf-light body, body.sf-light {
     margin-left: 28px !important;
   }
 }
+
+/* =========================================================
+   STREAMFLIX PROFILE MANAGEMENT & MOBILE PROFILE SWITCHER
+   ========================================================= */
+.profiles-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  background: radial-gradient(circle at center, #1b1b22 0%, #060608 80%) !important;
+}
+
+.profiles-grid {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 35px auto 40px;
+}
+
+.profile {
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.profile:hover {
+  transform: scale(1.08);
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 42px;
+  font-weight: 900;
+  color: #ffffff;
+  border: 3px solid transparent;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s ease;
+}
+
+.avatar-red { background: linear-gradient(135deg, #e50914, #730308); }
+.avatar-blue { background: linear-gradient(135deg, #0071eb, #003673); }
+.avatar-green { background: linear-gradient(135deg, #2e7d32, #0d3810); }
+.avatar-kids { background: linear-gradient(135deg, #f57c00, #e65100); }
+.add-avatar { background: rgba(255, 255, 255, 0.08); border: 2px dashed rgba(255, 255, 255, 0.25); color: #aaa; font-size: 38px; }
+
+.profile:hover .profile-avatar {
+  border-color: #ffffff;
+  box-shadow: 0 16px 45px rgba(255, 255, 255, 0.2);
+}
+
+.profile.profile-active .profile-avatar {
+  border-color: #e50914 !important;
+  box-shadow: 0 0 25px rgba(229, 9, 20, 0.7) !important;
+}
+
+.profile-active-badge {
+  position: absolute;
+  top: -8px;
+  right: -4px;
+  background: #e50914;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  border: 2px solid #000;
+  z-index: 5;
+}
+
+.profile p {
+  margin-top: 12px;
+  color: #888;
+  font-size: 14px;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.profile:hover p, .profile.profile-active p {
+  color: #ffffff;
+}
+
+.manage-profiles {
+  display: inline-block;
+  padding: 10px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.manage-profiles:hover, .manage-profiles.manage-active {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.profile-manage-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.profile-edit, .profile-delete {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(20, 20, 25, 0.9);
+  color: #ffffff;
+  font-size: 13px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s ease;
+}
+
+.profile-edit:hover { background: #0071eb; border-color: #0071eb; }
+.profile-delete:hover { background: #e50914; border-color: #e50914; }
+
+/* Mobile Profiles Adjustment */
+@media (max-width: 600px) {
+  .profiles-page {
+    padding: 60px 16px 30px;
+  }
+  .profiles-page h1 {
+    font-size: 28px !important;
+  }
+  .profiles-grid {
+    gap: 16px !important;
+    max-width: 320px;
+  }
+  .profile {
+    width: 100px;
+  }
+  .profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 12px;
+    font-size: 32px;
+  }
+  .profile p {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+  .manage-profiles {
+    padding: 8px 18px;
+    font-size: 12px;
+  }
+}

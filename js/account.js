@@ -2,8 +2,10 @@
   const defaults = {name:'Nishit', email:'member@example.com', plan:'Premium', price:'₹649/month', payment:'No payment method added', billing:'Not scheduled', pin:false, maturity:'All maturity levels', language:'English', autoplayNext:true, autoplayPreview:false};
   const state = {...defaults, ...JSON.parse(localStorage.getItem('streamflixAccount') || '{}')};
   const save = () => localStorage.setItem('streamflixAccount', JSON.stringify(state));
-  const $ = id => document.getElementById(id);
-  $('accountName').textContent = state.name; $('accountEmail').textContent = state.email; $('accountAvatar').textContent = (state.name || 'N').charAt(0).toUpperCase();
+  const activeProfileName = localStorage.getItem('streamflixProfile') || state.name || 'Nishit';
+  if ($('accountName')) $('accountName').textContent = activeProfileName;
+  if ($('accountEmail')) $('accountEmail').textContent = state.email || 'member@example.com';
+  if ($('accountAvatar')) $('accountAvatar').textContent = activeProfileName.charAt(0).toUpperCase();
   $('planText').textContent = `${state.plan} · ${state.price}`; $('paymentText').textContent = state.payment; $('billingText').textContent = state.billing;
   $('pinText').textContent = state.pin ? 'Enabled' : 'Not enabled'; $('maturityText').textContent = state.maturity; $('languageText').textContent = state.language;
   $('autoplayNext').checked = !!state.autoplayNext; $('autoplayPreview').checked = !!state.autoplayPreview;
