@@ -57,12 +57,11 @@
     goToSignup(email.value);
   });
 
-  // Only Sign In is directly enabled. Every other landing-page action is clickable,
-  // but requires signup first and opens the signup-first popup instead of navigating.
+  // Only Sign In and Sign Up/Get Started and theme/menu toggles are directly enabled.
   document.querySelectorAll('a, button').forEach(el => {
     if (el === getStarted || el.closest('#sf-signup-modal') || el.matches('.sf-signup-close')) return;
-    const isSignIn = el.matches('a[href="login.html"]');
-    if (isSignIn) return;
+    const isExempt = el.matches('.sf-theme-btn, .sf-menu-btn, a[href="login.html"], a[href="signup.html"], .landing-nav a, .auth-header a');
+    if (isExempt) return;
     el.addEventListener('click', e => {
       e.preventDefault();
       e.stopPropagation();

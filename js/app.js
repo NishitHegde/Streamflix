@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded",()=>{const n=document.querySelector
 (function(){
   document.addEventListener('click',function(e){
     const el=e.target.closest('button,a,.setting-action,.switch-ui,.profile-edit,.overlay button');
-    if(!el || el.disabled) return;
+    if(!el || el.disabled || ['INPUT', 'IMG', 'SELECT', 'TEXTAREA', 'HR', 'BR'].includes(el.tagName)) return;
     const r=el.getBoundingClientRect();
     const size=Math.max(r.width,r.height)*.35;
     const ripple=document.createElement('span');
