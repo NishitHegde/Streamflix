@@ -41,7 +41,8 @@
       const theme=document.createElement('button');
       theme.className='sf-theme-btn';theme.type='button';theme.title='Toggle theme';theme.setAttribute('aria-label','Toggle theme');
       theme.innerHTML=isLight?moonIcon:sunIcon;
-      theme.onclick=()=>{
+      theme.onclick=(e)=>{
+        if(e){e.preventDefault();e.stopPropagation();}
         const light=document.body.classList.toggle('sf-light');
         document.documentElement.classList.toggle('sf-light',light);
         localStorage.setItem('sfTheme',light?'light':'dark');

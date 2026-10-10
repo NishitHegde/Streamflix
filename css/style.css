@@ -3239,3 +3239,87 @@ html.sf-light body, body.sf-light {
     width: 100% !important;
   }
 }
+
+/* =========================================================
+   NAVBAR ACTIONS & LIGHT/DARK THEME TOGGLE MOBILE FIX
+   ========================================================= */
+.navbar-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-left: auto !important;
+}
+
+.sf-theme-btn, .sf-nav-icon, .sf-avatar {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  flex: none !important;
+  padding: 0 !important;
+}
+
+.sf-theme-btn:hover, .sf-nav-icon:hover, .sf-avatar:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.sf-theme-btn svg {
+  width: 15px !important;
+  height: 15px !important;
+  pointer-events: none !important;
+  display: block !important;
+  stroke: currentColor !important;
+}
+
+.sf-nav-icon {
+  font-size: 15px !important;
+  line-height: 1 !important;
+}
+
+.sf-nav-icon::before {
+  display: none !important;
+}
+
+.sf-avatar {
+  background: linear-gradient(135deg, #e50914, #730308) !important;
+  border-color: #e50914 !important;
+  font-weight: 800 !important;
+  font-size: 13px !important;
+  color: #ffffff !important;
+}
+
+/* Light mode overrides for theme toggle button */
+html.sf-light .sf-theme-btn, body.sf-light .sf-theme-btn,
+html.sf-light .sf-nav-icon, body.sf-light .sf-nav-icon {
+  background: rgba(0, 0, 0, 0.06) !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  color: #111111 !important;
+}
+
+html.sf-light .sf-menu-btn, body.sf-light .sf-menu-btn {
+  background: rgba(0, 0, 0, 0.06) !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+html.sf-light .sf-menu-btn span, body.sf-light .sf-menu-btn span {
+  background: #111111 !important;
+}
+
+@media (max-width: 768px) {
+  .navbar-actions {
+    gap: 6px !important;
+  }
+  .navbar-actions > a {
+    display: inline-flex !important;
+  }
+}
