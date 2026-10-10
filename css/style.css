@@ -2804,3 +2804,141 @@ html.sf-light body, body.sf-light {
   min-height: 38px !important;
   padding: 8px 18px !important;
 }
+
+/* ==========================================================================
+   ULTIMATE UI POLISH & MOBILE RESPONSIVENESS (320px - 768px)
+   ========================================================================== */
+
+/* Touch Scroll Smoothness & Hidden Scrollbars for Horizontal Rails */
+.home-rail-row, .top10-row, .trending-row, .cast-grid, .filters, .sf-chips {
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.home-rail-row::-webkit-scrollbar,
+.top10-row::-webkit-scrollbar,
+.trending-row::-webkit-scrollbar,
+.cast-grid::-webkit-scrollbar,
+.filters::-webkit-scrollbar,
+.sf-chips::-webkit-scrollbar {
+  display: none;
+}
+
+/* Fluid Typography & Mobile Heights */
+@media (max-width: 768px) {
+  /* Navbar */
+  .navbar {
+    height: 56px !important;
+    padding: 0 12px !important;
+  }
+  .navbar-logo, .logo, .auth-logo {
+    font-size: 18px !important;
+    letter-spacing: -1px !important;
+  }
+  
+  /* Hero Banners */
+  .hero, .sf-cinematic-hero, .details-hero, .trending-hero, .sf-trending-feature {
+    min-height: 380px !important;
+    padding: 70px 14px 24px !important;
+  }
+  .hero-content h1, .details-content h1, .trending-hero h1, .sf-trending-feature-copy h2 {
+    font-size: clamp(24px, 6.5vw, 38px) !important;
+    line-height: 1.15 !important;
+    margin: 8px 0 12px !important;
+  }
+  .hero-content p, .details-content p, .trending-hero p, .sf-trending-feature-copy p {
+    font-size: 13px !important;
+    line-height: 1.45 !important;
+  }
+  
+  /* Details & Action Buttons */
+  .details-actions, .hero-buttons, .home-spotlight-actions, .trending-hero-actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  .details-actions .btn, .hero-buttons .btn, .home-spotlight-actions .btn {
+    flex: 1 1 calc(50% - 4px) !important;
+    padding: 9px 12px !important;
+    font-size: 12px !important;
+    justify-content: center !important;
+  }
+
+  /* Movie Cards Grid */
+  .movie-grid, .sf-trending-grid, .sf-movie-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .movie-card {
+    width: 100% !important;
+  }
+  .movie-card .poster {
+    aspect-ratio: 2/3 !important;
+    width: 100% !important;
+  }
+  .movie-info h3, .home-card-title {
+    font-size: 13px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  
+  /* Top 10 Numbered Rail */
+  .top10-row {
+    gap: 12px !important;
+    padding: 10px 12px 24px !important;
+  }
+  .top10-row .trend-card {
+    min-width: 150px !important;
+    height: 215px !important;
+  }
+  .top10-row .trend-num {
+    font-size: 110px !important;
+    left: -4px !important;
+    bottom: 8px !important;
+    -webkit-text-stroke: 2px #444 !important;
+  }
+  .top10-row .trend-poster {
+    width: 118px !important;
+    height: 175px !important;
+    margin-left: 32px !important;
+  }
+
+  /* Video Player Controls on Mobile */
+  .video-controls-bar {
+    padding: 10px 12px 14px !important;
+  }
+  .controls-content {
+    gap: 6px !important;
+  }
+  .ctrl-btn {
+    padding: 5px 8px !important;
+    font-size: 11px !important;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Ultra-small phones (iPhone SE, Galaxy Fold) */
+  .navbar-logo {
+    font-size: 16px !important;
+  }
+  .hero-content h1, .details-content h1 {
+    font-size: 22px !important;
+  }
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+  .top10-row .trend-card {
+    min-width: 135px !important;
+    height: 195px !important;
+  }
+  .top10-row .trend-num {
+    font-size: 95px !important;
+  }
+  .top10-row .trend-poster {
+    width: 105px !important;
+    height: 155px !important;
+    margin-left: 28px !important;
+  }
+}
