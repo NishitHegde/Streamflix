@@ -3114,3 +3114,128 @@ html.sf-light body, body.sf-light {
     font-size: 12px;
   }
 }
+
+/* =========================================================
+   MOBILE NAVBAR & ACCOUNT SECTION FIXES
+   ========================================================= */
+.sf-menu-btn {
+  display: none;
+  width: 36px !important;
+  height: 36px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.sf-menu-btn span {
+  display: block;
+  width: 14px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .sf-menu-btn {
+    display: flex !important;
+    order: 2 !important;
+  }
+  .navbar-logo {
+    order: 1 !important;
+    margin-right: auto !important;
+  }
+  .navbar-actions {
+    order: 3 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+  .navbar {
+    height: 58px !important;
+    padding: 0 14px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10000 !important;
+    background: rgba(7, 7, 8, 0.95) !important;
+    backdrop-filter: blur(20px) !important;
+  }
+  .navbar-links {
+    position: fixed !important;
+    top: 58px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    background: rgba(10, 10, 14, 0.98) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    padding: 16px 20px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    display: none !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8) !important;
+    z-index: 99999 !important;
+  }
+  .navbar-links.sf-open {
+    display: flex !important;
+  }
+  .navbar-links a {
+    font-size: 15px !important;
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: #ddd !important;
+    text-decoration: none !important;
+  }
+  .navbar-links a:hover, .navbar-links a.active {
+    background: rgba(229, 9, 20, 0.2) !important;
+    color: #ffffff !important;
+  }
+
+  /* Account Section Mobile Polish */
+  .account-real {
+    padding-top: 80px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+  .account-heading h1 {
+    font-size: 28px !important;
+  }
+  .account-summary {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    padding: 18px !important;
+  }
+  .account-summary .btn {
+    width: 100% !important;
+    text-align: center !important;
+  }
+  .setting-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    padding: 14px 18px !important;
+  }
+  .setting-action {
+    align-self: flex-start !important;
+    padding-top: 2px !important;
+  }
+  .danger-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    padding: 18px !important;
+  }
+  .danger-card .btn {
+    width: 100% !important;
+  }
+}
